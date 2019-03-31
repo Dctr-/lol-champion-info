@@ -1,8 +1,8 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,7 +25,10 @@ public class Main {
             });
         }
         try {
-            pool.invokeAll(tasks);
+            List<Future<Image>> results = pool.invokeAll(tasks);
+            for (Future<Image> result : results) {
+                result.get();
+            }
         } catch (Exception e) {
             System.out.println();
         }
