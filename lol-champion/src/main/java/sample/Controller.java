@@ -69,6 +69,8 @@ public class Controller {
                 "Support",
                 "Tank"
         );
+        if(sortComboBox == null) return;
+
         sortComboBox.setItems(options); //Sets the Combobox options to the list of classes
 
         championTilePane.setHgap(4); //Spacing between champion tiles
@@ -129,11 +131,9 @@ public class Controller {
     //When method is called, scene will change to individualChampion
     public void changeScreen(MouseEvent event) throws IOException {
         Parent individualChampionParent = FXMLLoader.load(getClass().getClassLoader().getResource("individualChampion.fxml"));
-        Scene individualChampionScene = new Scene(individualChampionParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); //This gets the stage information
-        window.setScene(individualChampionScene);
-        window.show();
+        window.getScene().setRoot(individualChampionParent);
     }
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
