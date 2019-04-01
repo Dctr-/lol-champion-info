@@ -1,4 +1,5 @@
 package sample;
+
 import java.util.ArrayList;
 
 public class Champion {
@@ -6,7 +7,7 @@ public class Champion {
     private int key, difficulty;
     private ArrayList<String> tags = new ArrayList<>();
 
-    public Champion (String id, String title, String blurb, int key, ArrayList<String> tags, int difficulty) {
+    public Champion(String id, String title, String blurb, int key, ArrayList<String> tags, int difficulty) {
         this.id = id;
         this.title = title;
         this.blurb = blurb;
@@ -17,6 +18,7 @@ public class Champion {
     public String getId() {
         return id;
     }
+
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }

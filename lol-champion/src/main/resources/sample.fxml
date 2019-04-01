@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8"
+          fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
+            <children>
+                <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="187.0" layoutY="14.0"
+                       prefHeight="17.0" prefWidth="126.0" text="Title Here">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="championSearchBar" layoutX="139.0" layoutY="51.0" prefHeight="25.0" prefWidth="222.0"
+                           promptText="Search..."/>
+                <Label layoutX="98.0" layoutY="83.0" text="Sort By:"/>
+                <ComboBox fx:id="sortComboBox" layoutX="145.0" layoutY="79.0" prefWidth="150.0" promptText="Default"/>
+                <ScrollPane fx:id="championScrollPane" hbarPolicy="NEVER" layoutX="34.0" layoutY="116.0"
+                            prefHeight="559.0" prefWidth="432.0">
+                    <content>
+                        <TilePane fx:id="championTilePane" prefHeight="558.0" prefWidth="417.0"/>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>

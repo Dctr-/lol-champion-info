@@ -1,11 +1,13 @@
 package sample;
-import com.google.gson.*;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -29,8 +30,20 @@ import java.util.*;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
+    //Initializers
+    @FXML
+    private ComboBox<String> sortComboBox;
+    @FXML
+    private TextField championSearchBar;
+    @FXML
+    private TilePane championTilePane;
+    @FXML
+    private ScrollPane championScrollPane;
+    @FXML
+    private AnchorPane mainWindow;
 
-    @FXML private void initialize () {
+    @FXML
+    private void initialize() {
         ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
         Gson gson = new Gson(); //Parsing object
 
@@ -40,8 +53,7 @@ public class Controller {
 
         Set<Map.Entry<String, JsonElement>> mySet = jobject.entrySet(); //https://www.physicsforums.com/threads/java-entryset-iterator.740478/
         System.out.println("mySet as 'key : value'");
-        for (Map.Entry<String, JsonElement> singleItem : mySet)
-        {
+        for (Map.Entry<String, JsonElement> singleItem : mySet) {
             Champion newChampion = gson.fromJson(singleItem.getValue(), Champion.class);
             allChampions.add(newChampion);
             System.out.println(singleItem.getKey() + " : " + singleItem.getValue());
@@ -63,7 +75,7 @@ public class Controller {
         championTilePane.setVgap(4);
 
         for (Champion champion : allChampions) { //Adds each champion to the
-            Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75,75, true,false);
+            Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
             ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
 
             championIcons.put(champion.getId(), imageView);
@@ -114,25 +126,18 @@ public class Controller {
         });
     }
 
-    //Initializers
-    @FXML private ComboBox<String> sortComboBox;
-    @FXML private TextField championSearchBar;
-    @FXML private TilePane championTilePane;
-    @FXML private ScrollPane championScrollPane;
-    @FXML private AnchorPane mainWindow;
-
     //When method is called, scene will change to individualChampion
-    public void changeScreen (MouseEvent event) throws IOException{
-        Parent individualChampionParent = FXMLLoader.load(getClass().getResource("individualChampion.fxml"));
+    public void changeScreen(MouseEvent event) throws IOException {
+        Parent individualChampionParent = FXMLLoader.load(getClass().getResource("lolchampion/sample/individualChampion.fxml"));
         Scene individualChampionScene = new Scene(individualChampionParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //This gets the stage information
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); //This gets the stage information
         window.setScene(individualChampionScene);
         window.show();
     }
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
-    private String jsonGetRequest (String userUrl) {
+    private String jsonGetRequest(String userUrl) {
         String json = null;
         try {
             URL url = new URL(userUrl);
