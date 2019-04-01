@@ -17,7 +17,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="700.0" prefWidth="500.0">
+      <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
          <children>
             <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="187.0" layoutY="14.0" prefHeight="17.0" prefWidth="126.0" text="Title Here">
                <font>

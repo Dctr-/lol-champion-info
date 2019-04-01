@@ -4,12 +4,23 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -63,6 +74,13 @@ public class Controller {
 
             Pane newPane = new Pane(); //Creates a pane (Can be clicked on)
             newPane.getChildren().add(newLabel); //Adds the label to the pane
+            newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+                try {
+                    changeScreen(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }));
 
             championTilePane.getChildren().add(newPane); //Adds the pane to the tilepane grid
         }
@@ -81,7 +99,13 @@ public class Controller {
 
                         Pane newPane = new Pane();
                         newPane.getChildren().add(newLabel);
-
+                        newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+                            try {
+                                changeScreen(event);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }));
                         championTilePane.getChildren().add(newPane);
                     }
 
@@ -95,6 +119,17 @@ public class Controller {
     @FXML private TextField championSearchBar;
     @FXML private TilePane championTilePane;
     @FXML private ScrollPane championScrollPane;
+    @FXML private AnchorPane mainWindow;
+
+    //When method is called, scene will change to individualChampion
+    public void changeScreen (MouseEvent event) throws IOException{
+        Parent individualChampionParent = FXMLLoader.load(getClass().getResource("individualChampion.fxml"));
+        Scene individualChampionScene = new Scene(individualChampionParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //This gets the stage information
+        window.setScene(individualChampionScene);
+        window.show();
+    }
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
     private String jsonGetRequest (String userUrl) {
