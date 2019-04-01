@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Implemented champion search function.  Uses hashmap to store images to decrease load times.">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="It didnt go through">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/META-INF/COIS2240_FinalProject.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/sample/Champion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/sample/Champion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/sample/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/COIS2240_FinalProject/sample/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Champion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Champion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="272">
+              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="79" column="81" lean-forward="true" selection-start-line="79" selection-start-column="81" selection-end-line="79" selection-end-column="81" />
+            <state relative-caret-position="1037">
+              <caret line="61" column="39" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -198,7 +191,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554102409140" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554102665693" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -324,7 +317,28 @@
       <option name="project" value="LOCAL" />
       <updated>1554079304837</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Implemented champion search function.  Uses hashmap to store images to decrease load times.&#10;Not case sensitive.">
+      <created>1554102383769</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554102383769</updated>
+    </task>
+    <task id="LOCAL-00005" summary="It didnt go through">
+      <created>1554102501731</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1554102501731</updated>
+    </task>
+    <task id="LOCAL-00006" summary="It didnt go through">
+      <created>1554102541354</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1554102541354</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -343,7 +357,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -375,7 +389,9 @@
     <MESSAGE value="Created Project files" />
     <MESSAGE value="Created a champion menu.  Dropdown button containing types of champions (Fighter, tank, etc...).&#10;Created TilePane.  Labels can be added to tilepane with a photo and text.&#10;Began working on JSON implementation.  JSON can be accessed and converted to a string.  (Need to figure out how to parse JSON for champ names)&#10;Need to encase tilepane with scrolling capabilities." />
     <MESSAGE value="Implemented horizontal scroll to champion icon display.&#10;JSON implemented.  Creates a champion object which contains: id, title, blurb, key, tags.  Still need to get difficulty, and other properties.&#10;TilePane outputs champions in alphabetical order.&#10;&lt;Need&gt;&#10;-Action events for champion panes when clicked.&#10;-Sorting based on textfield input&#10;-Sorting based on champion tags&#10;-Champion detail pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented horizontal scroll to champion icon display.&#10;JSON implemented.  Creates a champion object which contains: id, title, blurb, key, tags.  Still need to get difficulty, and other properties.&#10;TilePane outputs champions in alphabetical order.&#10;&lt;Need&gt;&#10;-Action events for champion panes when clicked.&#10;-Sorting based on textfield input&#10;-Sorting based on champion tags&#10;-Champion detail pages" />
+    <MESSAGE value="Implemented champion search function.  Uses hashmap to store images to decrease load times.&#10;Not case sensitive." />
+    <MESSAGE value="It didnt go through" />
+    <option name="LAST_COMMIT_MESSAGE" value="It didnt go through" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -405,16 +421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -430,10 +436,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="79" column="81" lean-forward="true" selection-start-line="79" selection-start-column="81" selection-end-line="79" selection-end-column="81" />
+        <state relative-caret-position="1037">
+          <caret line="61" column="39" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

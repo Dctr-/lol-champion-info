@@ -20,7 +20,6 @@ public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
 
     @FXML private void initialize () {
-        //String championJSONAsString = jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json");
         ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
         Gson gson = new Gson(); //Parsing object
 
