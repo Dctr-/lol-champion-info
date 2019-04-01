@@ -1,5 +1,7 @@
 package sample;
 import com.google.gson.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import java.net.URL;
 import java.util.*;
 
 public class Controller {
+    HashMap<String, ImageView> championIcons = new HashMap<>();
 
     @FXML private void initialize () {
         //String championJSONAsString = jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json");
@@ -53,6 +56,8 @@ public class Controller {
             Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75,75, true,false);
             ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
 
+            championIcons.put(champion.getId(), imageView);
+
             Label newLabel = new Label(champion.getId()); //Creates champion label to go underneath picture
             newLabel.setGraphic(imageView); //Adds image to label
             newLabel.setContentDisplay(ContentDisplay.TOP); //Puts text underneath photo
@@ -62,6 +67,28 @@ public class Controller {
 
             championTilePane.getChildren().add(newPane); //Adds the pane to the tilepane grid
         }
+
+        championSearchBar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                //What happens when a different character is input
+                championTilePane.getChildren().clear();
+                for (Champion champion : allChampions
+                ) {
+                    if (champion.getId().toLowerCase().contains(newValue.toLowerCase())) {
+                        Label newLabel = new Label(champion.getId());
+                        newLabel.setGraphic(championIcons.get(champion.getId()));
+                        newLabel.setContentDisplay(ContentDisplay.TOP);
+
+                        Pane newPane = new Pane();
+                        newPane.getChildren().add(newLabel);
+
+                        championTilePane.getChildren().add(newPane);
+                    }
+
+                }
+            }
+        });
     }
 
     //Initializers
