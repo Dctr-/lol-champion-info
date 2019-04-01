@@ -1,42 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eeed5baf-4e5b-45f7-8c3f-8632abeeb52b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/lolchampion.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/src/sample/individualChampion.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/src/sample/sample.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lol-champion.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sample/Champion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sample/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sample/IndividualChampionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sample/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/individualChampion.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/COIS2240_FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/COIS2240_FinalProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/Champion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/Controller$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/IndividualChampionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/individualChampion.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/out/production/COIS2240_FinalProject/sample/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/src/sample/Champion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/src/sample/Champion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/src/sample/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/src/sample/IndividualChampionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/src/sample/IndividualChampionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../COIS2240_FinalProject/lolchampion/src/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/src/sample/individualChampion.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COIS2240_FinalProject/src/sample/sample.fxml" beforeDir="false" />
-    </list>
+    <list default="true" id="eeed5baf-4e5b-45f7-8c3f-8632abeeb52b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,6 +26,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -70,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            <state relative-caret-position="272">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -127,35 +97,17 @@
             <path>
               <item name="lolchampion" type="b2602c69:ProjectViewProjectNode" />
               <item name="lol-champion" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="lolchampion" type="b2602c69:ProjectViewProjectNode" />
               <item name="lol-champion" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="lolchampion" type="b2602c69:ProjectViewProjectNode" />
               <item name="lol-champion" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lolchampion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lol-champion" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lolchampion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lol-champion" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -168,7 +120,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554150293648" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554150550826" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -223,12 +175,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1554149737197</updated>
-      <workItem from="1554149738445" duration="521000" />
+      <workItem from="1554149738445" duration="786000" />
     </task>
+    <task id="LOCAL-00001" summary="add workspace">
+      <created>1554150471992</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1554150471992</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="521000" />
+    <option name="totallyTimeSpent" value="786000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -239,7 +199,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
@@ -249,7 +209,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -268,6 +228,10 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="add workspace" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -275,9 +239,6 @@
           <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lol-champion.iml">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -292,10 +253,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="272">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lol-champion.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
