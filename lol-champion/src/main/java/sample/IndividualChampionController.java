@@ -35,8 +35,6 @@ public class IndividualChampionController {
                 }
             }
         });
-
-        championName.setText(champion.getId());
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -47,5 +45,8 @@ public class IndividualChampionController {
     public void setParent(Scene parent) {
         this.parent = parent;
     }
-    public void setChampion(Champion champion) { this.champion = champion; }
+    public void setChampion(Champion champion) {
+        this.champion = champion;
+        championName.setText(champion.getId());
+    }
 }
