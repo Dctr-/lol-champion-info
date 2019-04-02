@@ -15,6 +15,7 @@ public class Main extends Application {
     private void setPrimaryStage(Stage stage) {
         Main.primaryStage = stage;
     }
+
     static public Stage getPrimaryStage() {
         return Main.primaryStage;
     }

@@ -20,6 +20,7 @@ public class Champion {
     public String getId() {
         return id;
     }
+    public ArrayList<String> getTags() { return tags;}
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }

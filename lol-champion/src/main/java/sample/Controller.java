@@ -104,19 +104,20 @@ public class Controller {
                 updateTilePane(newValue); //TilePane is updated on each textfield action event
             }
         });
+
+        // combobox sort selection has been made, update champs
+        sortComboBox.setOnAction(e -> {
+            sortTilePanes(sortComboBox.getValue());
+        });
     }
 
     private void updateTilePane (String newValue) {
         championTilePane.getChildren().clear();
-        for (Champion champion : allChampions
-        ) {
+        for (Champion champion : allChampions) {
             if (champion.getId().toLowerCase().contains(newValue.toLowerCase())) {
-                Label newLabel = new Label(champion.getId());
-                newLabel.setGraphic(championIcons.get(champion.getId()));
-                newLabel.setContentDisplay(ContentDisplay.TOP);
+                Pane newPane = iconDisplay(champion);
 
-                Pane newPane = new Pane();
-                newPane.getChildren().add(newLabel);
+                // on mouse click change screen
                 newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
                     try {
                         changeScreen(event, champion);
@@ -127,6 +128,28 @@ public class Controller {
                 championTilePane.getChildren().add(newPane);
             }
         }
+    }
+
+    private void sortTilePanes(String filterSelected){ // what is newValue
+        championTilePane.getChildren().clear();
+        for (Champion champion : allChampions) {
+            if (champion.getTags().contains(filterSelected)){
+                Pane newPane = iconDisplay(champion);
+
+                championTilePane.getChildren().add(newPane);
+            }
+        }
+    }
+
+    private Pane iconDisplay(Champion champion){
+        Label newLabel = new Label(champion.getId());
+        newLabel.setGraphic(championIcons.get(champion.getId()));
+        newLabel.setContentDisplay(ContentDisplay.TOP);
+
+        Pane newPane = new Pane();
+        newPane.getChildren().add(newLabel);
+
+        return newPane;
     }
 
     private HashMap<String, ImageView> getChampionIcons() {
