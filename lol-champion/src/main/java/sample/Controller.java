@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,6 +26,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -159,9 +163,19 @@ public class Controller {
 
         for (Champion champion : allChampions) {
             tasks.add(() -> {
-                Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
-                ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
-
+                ImageView imageView;
+                File icon = new File("/images/" + champion.getId() + ".png");
+                if(!icon.exists()) {
+                    Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
+                    imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
+                    File imageFile = new File("/images/" + champion.getId() + ".png");
+                    if(!imageFile.getParentFile().exists()) {
+                        imageFile.getParentFile().mkdirs();
+                    }
+                    ImageIO.write(SwingFXUtils.fromFXImage(newImage, null), "png", imageFile);
+                } else {
+                    imageView = new ImageView(new Image(icon.toURI().toString()));
+                }
                 return new Pair(champion.getId(), imageView);
             });
         }
