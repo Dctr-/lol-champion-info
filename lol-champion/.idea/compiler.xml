@@ -9,5 +9,8 @@
         <module name="lol-champion" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="lol-champion" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -20,6 +21,7 @@ public class IndividualChampionController {
 
     //Initializers
     @FXML private Button backButton;
+    @FXML private Label championName;
 
     @FXML
     private void initialize () {
@@ -33,6 +35,8 @@ public class IndividualChampionController {
                 }
             }
         });
+
+        championName.setText(champion.getId());
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
