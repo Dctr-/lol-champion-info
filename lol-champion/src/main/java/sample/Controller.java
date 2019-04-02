@@ -23,12 +23,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
@@ -126,14 +131,27 @@ public class Controller {
     }
 
     private HashMap<String, ImageView> getChampionIcons() {
+        ExecutorService pool = Executors.newFixedThreadPool(20);
         HashMap<String, ImageView> imageViewHashMap = new HashMap<>();
+        java.util.List<Callable<Pair<String, ImageView>>> tasks = new ArrayList<>();
 
-        for (Champion champion : allChampions
-             ) {
-            Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
-            ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
+        for (Champion champion : allChampions) {
+            tasks.add(() -> {
+                Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
+                ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
 
-            imageViewHashMap.put(champion.getId(), imageView);
+                return new Pair(champion.getId(), imageView);
+
+            });
+        }
+
+        try {
+            List<Future<Pair<String, ImageView>>> results = pool.invokeAll(tasks);
+            for (Future<Pair<String, ImageView>> result : results) {
+                imageViewHashMap.put(result.get().getKey(), result.get().getValue());
+            }
+        } catch (Exception e) {
+            System.out.println();
         }
 
         return imageViewHashMap;
