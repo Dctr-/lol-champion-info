@@ -190,6 +190,7 @@ public class Controller {
 
         IndividualChampionController controller = individualChampionLoader.getController();
         controller.setParent(((Node) event.getSource()).getScene());
+        System.out.println("Setting champion to " + champion.getId());
         controller.setChampion(champion);
     }
 
