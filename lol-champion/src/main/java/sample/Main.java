@@ -15,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
-        primaryStage.setTitle("Replace with Title");
+        primaryStage.setTitle("LOL-Champion-Info");
         primaryStage.setScene(new Scene(root, 600, 700));
         primaryStage.show();
     }
