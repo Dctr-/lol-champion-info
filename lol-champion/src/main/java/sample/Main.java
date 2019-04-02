@@ -22,7 +22,6 @@ public class Main extends Application {
         return Main.primaryStage;
     }
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         setPrimaryStage(primaryStage);
