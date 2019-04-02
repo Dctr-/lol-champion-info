@@ -33,7 +33,7 @@ public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
     HashMap<String, Champion> championHashMap = new HashMap<>();
     ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
-
+    private Champion clickedChampion;
     //Initializers
     @FXML private ComboBox<String> sortComboBox;
     @FXML private TextField championSearchBar;
@@ -74,7 +74,7 @@ public class Controller {
                 "Tank"
         );
 
-        //if(sortComboBox == null) return; //temporary
+        if(sortComboBox == null) return; //temporary
         sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
                 "Default",
                 "Favorites",
@@ -93,8 +93,7 @@ public class Controller {
         championSearchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                //What happens when a different character is input
-                updateTilePane(newValue);
+                updateTilePane(newValue); //TilePane is updated on each textfield action event
             }
         });
     }
@@ -112,6 +111,7 @@ public class Controller {
                 newPane.getChildren().add(newLabel);
                 newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
                     try {
+                        clickedChampion = champion;
                         changeScreen(event);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -120,7 +120,6 @@ public class Controller {
                 championTilePane.getChildren().add(newPane);
             }
         }
-        System.out.println();
     }
 
     private HashMap<String, ImageView> getChampionIcons() {
@@ -139,7 +138,7 @@ public class Controller {
 
     //When method is called, scene will change to individualChampion
     public void changeScreen(MouseEvent event) throws IOException {
-        Parent individualChampionParent = FXMLLoader.load(getClass().getResource("individualChampion.fxml"));
+        Parent individualChampionParent = FXMLLoader.load(getClass().getClassLoader().getResource("individualChampion.fxml"));
         Scene individualChampionScene = new Scene(individualChampionParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); //This gets the stage information
@@ -171,5 +170,9 @@ public class Controller {
     private String streamToString(InputStream inputStream) {
         String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
         return text;
+    }
+
+    public Champion getClickedChampion() {
+        return clickedChampion;
     }
 }

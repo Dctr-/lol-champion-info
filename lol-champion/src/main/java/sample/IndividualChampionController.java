@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class IndividualChampionController {
+    Champion displayChampion = new Controller().getClickedChampion();
+
     //Initializers
     @FXML private Button backButton;
     @FXML
