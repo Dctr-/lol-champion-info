@@ -230,5 +230,4 @@ public class Controller {
         String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
         return text;
     }
-
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.shape.*?>
@@ -12,7 +14,11 @@
         <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
             <children>
                 <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
-            <Label fx:id="championName" layoutX="166.0" layoutY="31.0" prefHeight="17.0" prefWidth="169.0" text="Label" />
+            <Label fx:id="championName" layoutX="35.0" layoutY="46.0" prefHeight="27.0" prefWidth="288.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <ImageView fx:id="championSplash" fitHeight="280.0" fitWidth="154.0" layoutX="35.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
     </children>

@@ -17,12 +17,17 @@ public class Champion {
         this.tags = tags;
     }
 
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public String getId() {
         return id;
     }
     public ArrayList<String> getTags() { return tags;}
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
+    public String getTitle() { return title; }
+    public String getBlurb() { return blurb; }
+    public int getKey() { return key; }
+    public int getDifficulty() { return difficulty; }
 
 }
