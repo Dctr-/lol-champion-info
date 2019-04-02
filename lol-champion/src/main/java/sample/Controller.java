@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -159,15 +161,30 @@ public class Controller {
         ExecutorService pool = Executors.newFixedThreadPool(20);
         HashMap<String, ImageView> imageViewHashMap = new HashMap<>();
         java.util.List<Callable<Pair<String, ImageView>>> tasks = new ArrayList<>();
-
+        String findPath = "";
+        try {
+            findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
+            if(!findPath.endsWith("/")) {
+                findPath += "/";
+            }
+            findPath += "lol-champion/images/";
+            System.out.println(findPath);
+            File pathDir = new File(findPath);
+            if(!pathDir.exists()) {
+                Files.createDirectories(Paths.get(pathDir.toURI()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String path = findPath;
         for (Champion champion : allChampions) {
             tasks.add(() -> {
                 ImageView imageView;
-                File icon = new File("/images/" + champion.getId() + ".png");
+                File icon = new File(path + champion.getId() + ".png");
                 if(!icon.exists()) {
                     Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
                     imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
-                    File imageFile = new File("/images/" + champion.getId() + ".png");
+                    File imageFile = new File(path + champion.getId() + ".png");
                     if(!imageFile.getParentFile().exists()) {
                         imageFile.getParentFile().mkdirs();
                     }
