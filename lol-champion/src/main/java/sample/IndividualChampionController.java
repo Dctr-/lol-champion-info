@@ -20,6 +20,7 @@ public class IndividualChampionController {
 
     //Initializers
     @FXML private Button backButton;
+
     @FXML
     private void initialize () {
         backButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -38,11 +39,9 @@ public class IndividualChampionController {
         Main.getPrimaryStage().setScene(parent);
     }
 
+    //Accessers
     public void setParent(Scene parent) {
         this.parent = parent;
     }
-
-    public void setChampion(Champion champion) {
-        this.champion = champion;
-    }
+    public void setChampion(Champion champion) { this.champion = champion; }
 }

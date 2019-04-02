@@ -82,7 +82,6 @@ public class Controller {
                 "Tank"
         );
 
-        if(sortComboBox == null) return; //temporary
         sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
                 "Default",
                 "Favorites",
@@ -141,7 +140,6 @@ public class Controller {
                 ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
 
                 return new Pair(champion.getId(), imageView);
-
             });
         }
 
