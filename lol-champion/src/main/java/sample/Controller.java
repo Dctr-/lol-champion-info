@@ -107,7 +107,10 @@ public class Controller {
 
         // combobox sort selection has been made, update champs
         sortComboBox.setOnAction(e -> {
-            sortTilePanes(sortComboBox.getValue());
+            String filter = sortComboBox.getValue();
+            if (filter.equals("Default")){
+                updateTilePane("");
+            } else { sortTilePanes(filter); }
         });
     }
 
@@ -135,7 +138,6 @@ public class Controller {
         for (Champion champion : allChampions) {
             if (champion.getTags().contains(filterSelected)){
                 Pane newPane = iconDisplay(champion);
-
                 championTilePane.getChildren().add(newPane);
             }
         }
