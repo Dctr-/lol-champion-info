@@ -95,13 +95,13 @@ public class Controller {
 
         championTilePane.setHgap(4); //Spacing between champion tiles
         championTilePane.setVgap(4);
-        updateTilePane("");
+        searchTilePanes("");
 
 
         championSearchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                updateTilePane(newValue); //TilePane is updated on each textfield action event
+                searchTilePanes(newValue); //TilePane is updated on each textfield action event
             }
         });
 
@@ -109,12 +109,12 @@ public class Controller {
         sortComboBox.setOnAction(e -> {
             String filter = sortComboBox.getValue();
             if (filter.equals("Default")){
-                updateTilePane("");
+                searchTilePanes("");
             } else { sortTilePanes(filter); }
         });
     }
 
-    private void updateTilePane (String newValue) {
+    private void searchTilePanes (String newValue) {
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
             if (champion.getId().toLowerCase().contains(newValue.toLowerCase())) {
