@@ -111,7 +111,10 @@ public class Controller {
 
         // combobox sort selection has been made, update champs
         sortComboBox.setOnAction(e -> {
-            sortTilePanes(sortComboBox.getValue());
+            String filter = sortComboBox.getValue();
+            if (filter.equals("Default")){
+                updateTilePane("");
+            } else { sortTilePanes(filter); }
         });
     }
 
@@ -119,33 +122,21 @@ public class Controller {
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
             if (champion.getId().toLowerCase().contains(newValue.toLowerCase())) {
-                Pane newPane = iconDisplay(champion);
-
-                // on mouse click change screen
-                newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
-                    try {
-                        changeScreen(event, champion);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }));
-                championTilePane.getChildren().add(newPane);
+                iconDisplay(champion);
             }
         }
     }
 
-    private void sortTilePanes(String filterSelected){ // what is newValue
+    private void sortTilePanes(String filterSelected){
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
             if (champion.getTags().contains(filterSelected)){
-                Pane newPane = iconDisplay(champion);
-
-                championTilePane.getChildren().add(newPane);
+                iconDisplay(champion);
             }
         }
     }
 
-    private Pane iconDisplay(Champion champion){
+    private void iconDisplay(Champion champion){
         Label newLabel = new Label(champion.getId());
         newLabel.setGraphic(championIcons.get(champion.getId()));
         newLabel.setContentDisplay(ContentDisplay.TOP);
@@ -153,7 +144,15 @@ public class Controller {
         Pane newPane = new Pane();
         newPane.getChildren().add(newLabel);
 
-        return newPane;
+        // onclick action to every icon
+        newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+            try {
+                changeScreen(event, champion);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
+        championTilePane.getChildren().add(newPane);
     }
 
     private HashMap<String, ImageView> getChampionIcons() {
