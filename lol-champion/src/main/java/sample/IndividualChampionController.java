@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -14,7 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class IndividualChampionController {
-    Champion displayChampion = new Controller().getClickedChampion();
+    private Champion champion;
+    private Scene parent;
 
     //Initializers
     @FXML private Button backButton;
@@ -33,8 +35,14 @@ public class IndividualChampionController {
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
-        Parent sampleParent = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); //This gets the stage information
-        window.getScene().setRoot(sampleParent);
+        Main.getPrimaryStage().setScene(parent);
+    }
+
+    public void setParent(Scene parent) {
+        this.parent = parent;
+    }
+
+    public void setChampion(Champion champion) {
+        this.champion = champion;
     }
 }

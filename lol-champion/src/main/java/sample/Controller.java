@@ -22,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,6 @@ public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
     HashMap<String, Champion> championHashMap = new HashMap<>();
     ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
-    private Champion clickedChampion;
     //Initializers
     @FXML private ComboBox<String> sortComboBox;
     @FXML private TextField championSearchBar;
@@ -43,6 +43,9 @@ public class Controller {
     @FXML private GridPane mainGridPane;
     @FXML private Label titleLabel;
     @FXML private Label sortByLabel;
+
+    private FXMLLoader individualChampionLoader;
+    private Scene individualChampionScene;
 
     @FXML
     private void initialize() {
@@ -90,6 +93,7 @@ public class Controller {
         championTilePane.setVgap(4);
         updateTilePane("");
 
+
         championSearchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -111,8 +115,7 @@ public class Controller {
                 newPane.getChildren().add(newLabel);
                 newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
                     try {
-                        clickedChampion = champion;
-                        changeScreen(event);
+                        changeScreen(event, champion);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -137,13 +140,16 @@ public class Controller {
     }
 
     //When method is called, scene will change to individualChampion
-    public void changeScreen(MouseEvent event) throws IOException {
-        Parent individualChampionParent = FXMLLoader.load(getClass().getClassLoader().getResource("individualChampion.fxml"));
-        Scene individualChampionScene = new Scene(individualChampionParent);
+    public void changeScreen(MouseEvent event, Champion champion) throws IOException {
+        if(individualChampionLoader == null) {
+            individualChampionLoader = new FXMLLoader(getClass().getClassLoader().getResource("individualChampion.fxml"));
+            individualChampionScene = new Scene(individualChampionLoader.load());
+        }
+        Main.getPrimaryStage().setScene(individualChampionScene);
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); //This gets the stage information
-        window.setScene(individualChampionScene);
-        window.show();
+        IndividualChampionController controller = individualChampionLoader.getController();
+        controller.setParent(((Node) event.getSource()).getScene());
+        controller.setChampion(champion);
     }
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
@@ -172,7 +178,4 @@ public class Controller {
         return text;
     }
 
-    public Champion getClickedChampion() {
-        return clickedChampion;
-    }
 }

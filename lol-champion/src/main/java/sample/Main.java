@@ -12,8 +12,20 @@ public class Main extends Application {
         launch(args);
     }
 
+    private static Stage primaryStage;
+
+    private void setPrimaryStage(Stage stage) {
+        Main.primaryStage = stage;
+    }
+
+    static public Stage getPrimaryStage() {
+        return Main.primaryStage;
+    }
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        setPrimaryStage(primaryStage);
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
         primaryStage.setTitle("LOL-Champion-Info");
         primaryStage.setScene(new Scene(root, 600, 700));
