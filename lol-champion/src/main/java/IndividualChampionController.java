@@ -1,5 +1,5 @@
-package sample;
-
+import champion.Champion;
+import champion.Skin;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

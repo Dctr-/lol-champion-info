@@ -1,4 +1,4 @@
-package sample;
+package champion;
 
 public class Skin {
     private String name;

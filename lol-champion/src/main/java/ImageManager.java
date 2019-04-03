@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -57,7 +55,7 @@ public class ImageManager {
 
 
     /**
-     * Queues an image to be later downloaded with {@link sample.ImageManager#startImageDownload()}
+     * Queues an image to be later downloaded with {@link ImageManager#startImageDownload()}
      *
      * @param url
      *        the url matching an image to be downloaded

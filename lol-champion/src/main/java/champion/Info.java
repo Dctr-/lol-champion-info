@@ -1,4 +1,4 @@
-package sample;
+package champion;
 
 public class Info {
     private int attack, defense, magic, difficulty;
