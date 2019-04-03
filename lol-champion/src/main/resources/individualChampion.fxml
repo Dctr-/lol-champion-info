@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.shape.*?>
@@ -12,7 +14,64 @@
         <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
             <children>
                 <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
-            <Label fx:id="championName" layoutX="166.0" layoutY="31.0" prefHeight="17.0" prefWidth="169.0" text="Label" />
+            <Label fx:id="championName" layoutX="35.0" layoutY="46.0" prefHeight="30.0" prefWidth="447.0" text="Champion Name + Blurb">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <ImageView fx:id="championSplash" fitHeight="280.0" fitWidth="154.0" layoutX="35.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblAbilities" layoutX="323.0" layoutY="82.0" text="Abilities" underline="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="qImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="wImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="eImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="rImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="qAbilityLabel" layoutX="250.0" layoutY="121.0" prefHeight="20.0" prefWidth="241.0" text="qLabel">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="wAbilityLabel" layoutX="250.0" layoutY="151.0" prefHeight="20.0" prefWidth="241.0" text="wLabel">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="eAbilityLabel" layoutX="250.0" layoutY="181.0" prefHeight="20.0" prefWidth="241.0" text="eLabel">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="rAbilityLabel" layoutX="250.0" layoutY="211.0" prefHeight="20.0" prefWidth="241.0" text="rLabel">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="attackDamageIcon" fitHeight="50.0" fitWidth="50.0" layoutX="213.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="abilityPowerIcon" fitHeight="50.0" fitWidth="50.0" layoutX="308.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="defenseIcon" fitHeight="50.0" fitWidth="50.0" layoutX="407.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="attackDamageValue" alignment="CENTER" contentDisplay="CENTER" layoutX="232.0" layoutY="311.0" text="ADValue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="abilityPowerValue" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="311.0" text="APValue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="defenseValue" alignment="CENTER" contentDisplay="CENTER" layoutX="426.0" layoutY="311.0" text="DValue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TilePane fx:id="skinsTilePane" alignment="CENTER" layoutX="14.0" layoutY="382.0" prefHeight="307.0" prefWidth="473.0" />
+            <Label fx:id="lblSkins" layoutX="232.0" layoutY="370.0" text="Skins">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>

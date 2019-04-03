@@ -7,11 +7,10 @@ import com.google.gson.JsonParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -21,14 +20,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Pair;
-
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -37,7 +37,6 @@ import java.util.concurrent.Future;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
-    HashMap<String, Champion> championHashMap = new HashMap<>();
     ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
     //Initializers
     @FXML private ComboBox<String> sortComboBox;
@@ -71,17 +70,6 @@ public class Controller {
         //Load all images into hashmap
         championIcons = getChampionIcons();
 
-        ObservableList<String> options = FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
-                "Default",
-                "Favorites",
-                "Assassin",
-                "Fighter",
-                "Mage",
-                "Marksman",
-                "Support",
-                "Tank"
-        );
-
         sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
                 "Default",
                 "Favorites",
@@ -96,7 +84,6 @@ public class Controller {
         championTilePane.setHgap(4); //Spacing between champion tiles
         championTilePane.setVgap(4);
         searchTilePanes("");
-
 
         championSearchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -155,12 +142,37 @@ public class Controller {
         ExecutorService pool = Executors.newFixedThreadPool(20);
         HashMap<String, ImageView> imageViewHashMap = new HashMap<>();
         java.util.List<Callable<Pair<String, ImageView>>> tasks = new ArrayList<>();
-
+        String findPath = "";
+        try {
+            findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
+            if(!findPath.endsWith("/")) {
+                findPath += "/";
+            }
+            findPath += "lol-champion/images/";
+            System.out.println(findPath);
+            File pathDir = new File(findPath);
+            if(!pathDir.exists()) {
+                Files.createDirectories(Paths.get(pathDir.toURI()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String path = findPath;
         for (Champion champion : allChampions) {
             tasks.add(() -> {
-                Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
-                ImageView imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
-
+                ImageView imageView;
+                File icon = new File(path + champion.getId() + ".png");
+                if(!icon.exists()) {
+                    Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
+                    imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
+                    File imageFile = new File(path + champion.getId() + ".png");
+                    if(!imageFile.getParentFile().exists()) {
+                        imageFile.getParentFile().mkdirs();
+                    }
+                    ImageIO.write(SwingFXUtils.fromFXImage(newImage, null), "png", imageFile);
+                } else {
+                    imageView = new ImageView(new Image(icon.toURI().toString()));
+                }
                 return new Pair(champion.getId(), imageView);
             });
         }
@@ -211,10 +223,7 @@ public class Controller {
         return json;
     }
 
-    //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
     private String streamToString(InputStream inputStream) {
-        String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
-        return text;
+        return new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
     }
-
 }
