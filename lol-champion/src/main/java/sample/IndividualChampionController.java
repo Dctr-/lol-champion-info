@@ -4,6 +4,7 @@ import com.google.gson.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,6 +40,9 @@ public class IndividualChampionController {
     @FXML private ImageView attackDamageIcon;
     @FXML private ImageView abilityPowerIcon;
     @FXML private ImageView defenseIcon;
+    @FXML private Label attackDamageValue;
+    @FXML private Label abilityPowerValue;
+    @FXML private Label defenseValue;
 
     @FXML
     private void initialize () {
@@ -82,6 +86,9 @@ public class IndividualChampionController {
         attackDamageIcon.setImage(new Image("https://i.imgur.com/oTVnrLb.png", 50,50,true,false));
         abilityPowerIcon.setImage(new Image("https://i.imgur.com/ZcNgPR5.png", 30,50,true,false));
         defenseIcon.setImage(new Image("https://i.imgur.com/VmmAxmC.png", 50,50,true,false));
+        attackDamageValue.setText(Integer.toString(info.getAttack()));
+        abilityPowerValue.setText(Integer.toString(info.getMagic()));
+        defenseValue.setText(Integer.toString(info.getDefense()));
     }
 
     private void getStats () {

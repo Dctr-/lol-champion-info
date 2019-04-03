@@ -50,7 +50,22 @@
             </Label>
             <ImageView fx:id="attackDamageIcon" fitHeight="50.0" fitWidth="50.0" layoutX="213.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="abilityPowerIcon" fitHeight="50.0" fitWidth="50.0" layoutX="308.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="defenseIcon" fitHeight="50.0" fitWidth="50.0" layoutX="413.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="defenseIcon" fitHeight="50.0" fitWidth="50.0" layoutX="407.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="attackDamageValue" alignment="CENTER" contentDisplay="CENTER" layoutX="232.0" layoutY="311.0" text="ADValue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="abilityPowerValue" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="311.0" text="APValue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="defenseValue" alignment="CENTER" contentDisplay="CENTER" layoutX="426.0" layoutY="311.0" text="DValue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>
