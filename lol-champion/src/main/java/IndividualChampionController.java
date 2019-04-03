@@ -1,6 +1,5 @@
 import champion.Champion;
 import champion.Skin;
-import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,8 +16,6 @@ import java.io.IOException;
 public class IndividualChampionController {
     private Champion champion;
     private Scene parent;
-
-    Gson gson = new Gson(); //Parsing object
 
     //Initializers
     @FXML private Button backButton;

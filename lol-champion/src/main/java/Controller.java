@@ -24,6 +24,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
@@ -82,7 +86,6 @@ public class Controller {
     }
 
     private List<Champion> getChampionData() {
-        //TODO parallelize
         Gson gson = new Gson(); //Parsing object
         List<Champion> champions = new ArrayList<>();
 
@@ -94,19 +97,30 @@ public class Controller {
         Set<Map.Entry<String, JsonElement>> mySet = jobject.entrySet();
         List<String> championNames = new ArrayList<>();
         for (Map.Entry<String, JsonElement> singleItem : mySet) {
-            //Champion newChampion = gson.fromJson(singleItem.getValue(), Champion.class);
-            //allChampions.add(newChampion);
             championNames.add(singleItem.getKey());
         }
 
+        ExecutorService pool = Executors.newFixedThreadPool(20);
+        java.util.List<Callable<Champion>> tasks = new ArrayList<>();
+
         // Pull champion info
         for (String championName : championNames) {
-            JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            jsonObject = jsonObject.getAsJsonObject("data");
-            jsonObject = jsonObject.getAsJsonObject(championName);
+            tasks.add(() -> {
+                JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                jsonObject = jsonObject.getAsJsonObject("data");
+                jsonObject = jsonObject.getAsJsonObject(championName);
 
-            champions.add(gson.fromJson(jsonObject, Champion.class));
+                return gson.fromJson(jsonObject, Champion.class);
+            });
+        }
+
+        try {
+            for (Future<Champion> championFuture : pool.invokeAll(tasks)) {
+                champions.add(championFuture.get());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return champions;
