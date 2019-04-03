@@ -1,5 +1,7 @@
-import champion.Champion;
-import champion.Skin;
+package main;
+
+import main.champion.Champion;
+import main.champion.Skin;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -31,7 +33,7 @@ import java.util.concurrent.Future;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
-    List<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
+    List<Champion> allChampions = new ArrayList<>(); //Creates an array of main.champion objects, alphabetical order
     //Initializers
     @FXML private ComboBox<String> sortComboBox;
     @FXML private TextField championSearchBar;
@@ -54,7 +56,7 @@ public class Controller {
         //Load all images into hashmap
         championIcons = getChampionIcons();
 
-        sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
+        sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of main.champion for the dropdown menu
                 "Default",
                 "Favorites",
                 "Assassin",
@@ -65,7 +67,7 @@ public class Controller {
                 "Tank"
         )); //Sets the Combobox options to the list of classes
 
-        championTilePane.setHgap(4); //Spacing between champion tiles
+        championTilePane.setHgap(4); //Spacing between main.champion tiles
         championTilePane.setVgap(4);
         searchTilePanes("");
 
@@ -93,7 +95,7 @@ public class Controller {
         JsonObject jobject = jelement.getAsJsonObject();
         jobject = jobject.getAsJsonObject("data");
 
-        // Pull champion names
+        // Pull main.champion names
         Set<Map.Entry<String, JsonElement>> mySet = jobject.entrySet();
         List<String> championNames = new ArrayList<>();
         for (Map.Entry<String, JsonElement> singleItem : mySet) {
@@ -103,7 +105,7 @@ public class Controller {
         ExecutorService pool = Executors.newFixedThreadPool(20);
         java.util.List<Callable<Champion>> tasks = new ArrayList<>();
 
-        // Pull champion info
+        // Pull main.champion info
         for (String championName : championNames) {
             tasks.add(() -> {
                 JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));

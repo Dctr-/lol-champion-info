@@ -1,4 +1,4 @@
-package champion;
+package main.champion;
 
 public class Skin {
     private String name;

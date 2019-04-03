@@ -1,4 +1,4 @@
-package champion;
+package main.champion;
 
 public class Spell {
     private String id, name, description;

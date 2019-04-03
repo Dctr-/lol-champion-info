@@ -1,4 +1,4 @@
-package champion;
+package main.champion;
 
 public class Info {
     private int attack, defense, magic, difficulty;

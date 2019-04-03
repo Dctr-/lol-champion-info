@@ -1,5 +1,7 @@
-import champion.Champion;
-import champion.Skin;
+package main;
+
+import main.champion.Champion;
+import main.champion.Skin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

@@ -1,4 +1,4 @@
-package champion;
+package main.champion;
 
 import java.util.ArrayList;
 import java.util.List;
