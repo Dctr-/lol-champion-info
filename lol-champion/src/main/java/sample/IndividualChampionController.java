@@ -25,13 +25,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class IndividualChampionController {
     private Champion champion;
     private Scene parent;
+    private ArrayList<Spell> spellsList;
+
+    Gson gson = new Gson(); //Parsing object
 
     //Initializers
     @FXML private Button backButton;
@@ -68,22 +69,28 @@ public class IndividualChampionController {
     private void setData () { //Sets all the graphics on the javaFX scene
         championName.setText(champion.getId() + " " + champion.getTitle());
         championSplash.setImage(new Image("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getId() + "_0.jpg", 154, 280, true, false));
+
+
     }
 
-    private ParseIndividualChampion getStats () {
-        ParseIndividualChampion championStats = new ParseIndividualChampion();
-        Gson gson = new Gson(); //Parsing object
-
+    private void getStats () {
         JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         jsonObject = jsonObject.getAsJsonObject("data");
+        jsonObject = jsonObject.getAsJsonObject(champion.getId());
 
-        Set<Map.Entry<String, JsonElement>> mySet = jsonObject.entrySet(); //https://www.physicsforums.com/threads/java-entryset-iterator.740478/
+        this.spellsList = createSpellList(jsonObject.getAsJsonObject("spells"));
+    }
+
+    private ArrayList<Spell> createSpellList (JsonObject spellJSON) {
+        ArrayList<Spell> spellList = new ArrayList<>();
+
+        Set<Map.Entry<String, JsonElement>> mySet = spellJSON.entrySet(); //https://www.physicsforums.com/threads/java-entryset-iterator.740478/
         for (Map.Entry<String, JsonElement> singleItem : mySet) {
-            championStats = gson.fromJson(singleItem.getValue(), ParseIndividualChampion.class);
+            spellList.add(gson.fromJson(singleItem.getValue(), Spell.class));
         }
 
-        return championStats;
+        return spellList;
     }
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
