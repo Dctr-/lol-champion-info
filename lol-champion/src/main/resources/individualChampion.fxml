@@ -19,6 +19,7 @@
                   <Font size="18.0" />
                </font></Label>
             <ImageView fx:id="championSplash" fitHeight="280.0" fitWidth="154.0" layoutX="35.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="championQAbility" layoutX="84.0" layoutY="420.0" text="Label" />
             </children>
         </AnchorPane>
     </children>

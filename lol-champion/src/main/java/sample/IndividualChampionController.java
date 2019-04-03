@@ -1,9 +1,6 @@
 package sample;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,6 +35,7 @@ public class IndividualChampionController {
     @FXML private Button backButton;
     @FXML private Label championName;
     @FXML private ImageView championSplash;
+    @FXML private Label championQAbility;
 
     @FXML
     private void initialize () {
@@ -63,31 +61,31 @@ public class IndividualChampionController {
     }
     public void setChampion(Champion champion) {
         this.champion = champion;
+        getStats();
         setData();
     }
 
     private void setData () { //Sets all the graphics on the javaFX scene
         championName.setText(champion.getId() + " " + champion.getTitle());
         championSplash.setImage(new Image("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getId() + "_0.jpg", 154, 280, true, false));
-
-
+        championQAbility.setText(spellsList.get(0).getName());
     }
 
     private void getStats () {
-        JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
+        JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + champion.getId() + ".json"));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         jsonObject = jsonObject.getAsJsonObject("data");
         jsonObject = jsonObject.getAsJsonObject(champion.getId());
 
-        this.spellsList = createSpellList(jsonObject.getAsJsonObject("spells"));
+        this.spellsList = createSpellList(jsonObject.getAsJsonArray("spells"));
     }
 
-    private ArrayList<Spell> createSpellList (JsonObject spellJSON) {
+    private ArrayList<Spell> createSpellList (JsonArray spellJSON) {
         ArrayList<Spell> spellList = new ArrayList<>();
-
-        Set<Map.Entry<String, JsonElement>> mySet = spellJSON.entrySet(); //https://www.physicsforums.com/threads/java-entryset-iterator.740478/
-        for (Map.Entry<String, JsonElement> singleItem : mySet) {
-            spellList.add(gson.fromJson(singleItem.getValue(), Spell.class));
+        for (JsonElement spell: spellJSON
+             ) {
+            JsonObject object = spell.getAsJsonObject();
+            spellList.add(gson.fromJson(object, Spell.class));
         }
 
         return spellList;
