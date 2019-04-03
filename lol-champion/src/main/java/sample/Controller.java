@@ -67,6 +67,8 @@ public class Controller {
             System.out.println(singleItem.getKey() + " : " + singleItem.getValue());
         }
 
+        loadImages();
+
         //Load all images into hashmap
         championIcons = getChampionIcons();
 
@@ -99,6 +101,14 @@ public class Controller {
                 searchTilePanes("");
             } else { sortTilePanes(filter); }
         });
+    }
+
+    private void loadImages() {
+        for (Champion champion : allChampions) {
+            ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", champion.getId() + "_icon", 75, 75);
+        }
+
+        ImageManager.startImageDownload();
     }
 
     private void searchTilePanes (String newValue) {
@@ -139,53 +149,11 @@ public class Controller {
     }
 
     private HashMap<String, ImageView> getChampionIcons() {
-        ExecutorService pool = Executors.newFixedThreadPool(20);
         HashMap<String, ImageView> imageViewHashMap = new HashMap<>();
-        java.util.List<Callable<Pair<String, ImageView>>> tasks = new ArrayList<>();
-        String findPath = "";
-        try {
-            findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
-            if(!findPath.endsWith("/")) {
-                findPath += "/";
-            }
-            findPath += "lol-champion/images/";
-            System.out.println(findPath);
-            File pathDir = new File(findPath);
-            if(!pathDir.exists()) {
-                Files.createDirectories(Paths.get(pathDir.toURI()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String path = findPath;
         for (Champion champion : allChampions) {
-            tasks.add(() -> {
-                ImageView imageView;
-                File icon = new File(path + champion.getId() + ".png");
-                if(!icon.exists()) {
-                    Image newImage = new Image("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", 75, 75, true, false);
-                    imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
-                    File imageFile = new File(path + champion.getId() + ".png");
-                    if(!imageFile.getParentFile().exists()) {
-                        imageFile.getParentFile().mkdirs();
-                    }
-                    ImageIO.write(SwingFXUtils.fromFXImage(newImage, null), "png", imageFile);
-                } else {
-                    imageView = new ImageView(new Image(icon.toURI().toString()));
-                }
-                return new Pair(champion.getId(), imageView);
-            });
+            String url = "http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png";
+            imageViewHashMap.put(url, ImageManager.getImage(url));
         }
-
-        try {
-            List<Future<Pair<String, ImageView>>> results = pool.invokeAll(tasks);
-            for (Future<Pair<String, ImageView>> result : results) {
-                imageViewHashMap.put(result.get().getKey(), result.get().getValue());
-            }
-        } catch (Exception e) {
-            System.out.println();
-        }
-
         return imageViewHashMap;
     }
 

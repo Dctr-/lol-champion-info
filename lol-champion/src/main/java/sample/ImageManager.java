@@ -64,10 +64,7 @@ public class ImageManager {
      *        the url matching an image to be downloaded
      *
      * @param fileName
-     *        the name the file will be saved locally under
-     *
-     * @param fileExtension
-     *        an image file extension in the form 'png'
+     *        the name the file will be saved locally under, without extension
      *
      * @param width
      *        the expected width of the image
@@ -75,8 +72,9 @@ public class ImageManager {
      * @param height
      *        the expected height of the image
      */
-    public static void queueImageDownload(String url, String fileName, String fileExtension, int width, int height) {
+    public static void queueImageDownload(String url, String fileName, int width, int height) {
         tasks.add(() -> {
+            String fileExtension = url.substring(url.lastIndexOf(".") + 1);
             ImageView imageView;
             File icon = new File(path + fileName + "." + fileExtension);
             if(!icon.exists()) {
