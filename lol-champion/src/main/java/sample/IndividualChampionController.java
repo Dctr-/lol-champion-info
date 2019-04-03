@@ -26,7 +26,15 @@ public class IndividualChampionController {
     @FXML private Button backButton;
     @FXML private Label championName;
     @FXML private ImageView championSplash;
-    @FXML private Label championQAbility;
+    @FXML private Label lblAbilities;
+    @FXML private ImageView qImg;
+    @FXML private ImageView wImg;
+    @FXML private ImageView eImg;
+    @FXML private ImageView rImg;
+    @FXML private Label qAbilityLabel;
+    @FXML private Label wAbilityLabel;
+    @FXML private Label eAbilityLabel;
+    @FXML private Label rAbilityLabel;
 
     @FXML
     private void initialize () {
@@ -40,6 +48,11 @@ public class IndividualChampionController {
                 }
             }
         });
+
+        qImg.setImage(new Image("https://i.imgur.com/DSk0MzV.jpg", 30,30,true,false));
+        wImg.setImage(new Image("https://i.imgur.com/N6eTOxI.jpg", 30,30,true,false));
+        eImg.setImage(new Image("https://i.imgur.com/cJw5lB9.jpg", 30,30,true,false));
+        rImg.setImage(new Image("https://i.imgur.com/uTHV0A6.jpg", 30,30,true,false));
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -59,7 +72,10 @@ public class IndividualChampionController {
     private void setData () { //Sets all the graphics on the javaFX scene
         championName.setText(champion.getId() + " " + champion.getTitle());
         championSplash.setImage(new Image("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getId() + "_0.jpg", 154, 280, true, false));
-        championQAbility.setText(spellsList.get(0).getName());
+        qAbilityLabel.setText(spellsList.get(0).getName());
+        wAbilityLabel.setText(spellsList.get(1).getName());
+        eAbilityLabel.setText(spellsList.get(2).getName());
+        rAbilityLabel.setText(spellsList.get(3).getName());
     }
 
     private void getStats () {
@@ -81,6 +97,51 @@ public class IndividualChampionController {
 
         return spellList;
     }
+
+    /* Attempting to download ability image on first call
+    private void getAbilityIcons() {
+        String findPath = "";
+        try {
+            findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
+            if(!findPath.endsWith("/")) {
+                findPath += "/";
+            }
+            findPath += "lol-champion/images/";
+            System.out.println(findPath);
+            File pathDir = new File(findPath);
+            if(!pathDir.exists()) {
+                Files.createDirectories(Paths.get(pathDir.toURI()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String path = findPath;
+        String[][] addresses = new String[][]{
+                {"https://i.imgur.com/DSk0MzV.jpg","https://i.imgur.com/N6eTOxI.jpg","https://i.imgur.com/cJw5lB9.jpg","https://i.imgur.com/uTHV0A6.jpg"},
+                {"Q","W","E","R"}
+        };
+        for (int i = 0; i < 4; i++) {
+            ImageView imageView;
+            File abilityIcon = new File(path + addresses[1][i] + ".jpg");
+            if (!abilityIcon.exists()) {
+                Image newImage = new Image(addresses[0][i], 30,30,true,false);
+                imageView = new ImageView(newImage);
+                File imageFile = new File(path + addresses[1][i] + ".jpg");
+                if(!imageFile.getParentFile().exists()) {
+                    imageFile.getParentFile().mkdirs();
+                }
+                try {
+                    ImageIO.write(SwingFXUtils.fromFXImage(newImage, null), "jpg", imageFile);
+                } catch (IOException ie) {
+                    ie.printStackTrace();
+                }
+            }
+            else
+                imageView = new ImageView(new Image(abilityIcon.toURI().toString()));
+        }
+    }
+    */
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
     private String jsonGetRequest(String userUrl) {
