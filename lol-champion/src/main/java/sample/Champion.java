@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 
 public class Champion {
@@ -20,14 +18,10 @@ public class Champion {
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
-
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
     public ArrayList<String> getTags() { return tags;}
     public String getTitle() { return title; }
     public String getBlurb() { return blurb; }
     public int getKey() { return key; }
     public int getDifficulty() { return difficulty; }
-
 }

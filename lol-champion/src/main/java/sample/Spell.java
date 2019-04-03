@@ -12,5 +12,4 @@ public class Spell {
     public String getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }
-
 }

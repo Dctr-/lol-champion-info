@@ -7,12 +7,10 @@ import com.google.gson.JsonParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -22,12 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Pair;
-
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +37,6 @@ import java.util.concurrent.Future;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
-    HashMap<String, Champion> championHashMap = new HashMap<>();
     ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
     //Initializers
     @FXML private ComboBox<String> sortComboBox;
@@ -77,17 +70,6 @@ public class Controller {
         //Load all images into hashmap
         championIcons = getChampionIcons();
 
-        ObservableList<String> options = FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
-                "Default",
-                "Favorites",
-                "Assassin",
-                "Fighter",
-                "Mage",
-                "Marksman",
-                "Support",
-                "Tank"
-        );
-
         sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of champion for the dropdown menu
                 "Default",
                 "Favorites",
@@ -102,7 +84,6 @@ public class Controller {
         championTilePane.setHgap(4); //Spacing between champion tiles
         championTilePane.setVgap(4);
         updateTilePane("");
-
 
         championSearchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -242,9 +223,7 @@ public class Controller {
         return json;
     }
 
-    //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm
     private String streamToString(InputStream inputStream) {
-        String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
-        return text;
+        return new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
     }
 }
