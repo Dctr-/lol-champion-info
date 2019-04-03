@@ -98,8 +98,7 @@ public class IndividualChampionController {
 
         skinsTilePane.getChildren().clear();
 
-        for (Skin skin: skinsList
-             ) {
+        for (Skin skin: skinsList) {
             Label newLabel = new Label(skin.getName());
             newLabel.setGraphic(new ImageView(new Image("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getId() + "_" + skin.getNum() + ".jpg", 51, 93, true, false)));
             newLabel.setContentDisplay(ContentDisplay.TOP);
