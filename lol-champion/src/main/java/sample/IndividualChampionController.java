@@ -19,6 +19,7 @@ public class IndividualChampionController {
     private Champion champion;
     private Scene parent;
     private ArrayList<Spell> spellsList;
+    private Info info;
 
     Gson gson = new Gson(); //Parsing object
 
@@ -35,6 +36,9 @@ public class IndividualChampionController {
     @FXML private Label wAbilityLabel;
     @FXML private Label eAbilityLabel;
     @FXML private Label rAbilityLabel;
+    @FXML private ImageView attackDamageIcon;
+    @FXML private ImageView abilityPowerIcon;
+    @FXML private ImageView defenseIcon;
 
     @FXML
     private void initialize () {
@@ -48,11 +52,6 @@ public class IndividualChampionController {
                 }
             }
         });
-
-        qImg.setImage(new Image("https://i.imgur.com/DSk0MzV.jpg", 30,30,true,false));
-        wImg.setImage(new Image("https://i.imgur.com/N6eTOxI.jpg", 30,30,true,false));
-        eImg.setImage(new Image("https://i.imgur.com/cJw5lB9.jpg", 30,30,true,false));
-        rImg.setImage(new Image("https://i.imgur.com/uTHV0A6.jpg", 30,30,true,false));
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -76,6 +75,13 @@ public class IndividualChampionController {
         wAbilityLabel.setText(spellsList.get(1).getName());
         eAbilityLabel.setText(spellsList.get(2).getName());
         rAbilityLabel.setText(spellsList.get(3).getName());
+        qImg.setImage(new Image("https://i.imgur.com/DSk0MzV.jpg", 30,30,true,false));
+        wImg.setImage(new Image("https://i.imgur.com/N6eTOxI.jpg", 30,30,true,false));
+        eImg.setImage(new Image("https://i.imgur.com/cJw5lB9.jpg", 30,30,true,false));
+        rImg.setImage(new Image("https://i.imgur.com/uTHV0A6.jpg", 30,30,true,false));
+        attackDamageIcon.setImage(new Image("https://i.imgur.com/oTVnrLb.png", 50,50,true,false));
+        abilityPowerIcon.setImage(new Image("https://i.imgur.com/ZcNgPR5.png", 30,50,true,false));
+        defenseIcon.setImage(new Image("https://i.imgur.com/VmmAxmC.png", 50,50,true,false));
     }
 
     private void getStats () {
@@ -84,7 +90,11 @@ public class IndividualChampionController {
         jsonObject = jsonObject.getAsJsonObject("data");
         jsonObject = jsonObject.getAsJsonObject(champion.getId());
 
-        this.spellsList = createSpellList(jsonObject.getAsJsonArray("spells"));
+        JsonArray spellJson = jsonObject.getAsJsonArray("spells");
+        JsonObject infoJson = jsonObject.getAsJsonObject("info");
+
+        this.info = gson.fromJson(infoJson, Info.class);
+        this.spellsList = createSpellList(spellJson);
     }
 
     private ArrayList<Spell> createSpellList (JsonArray spellJSON) {
