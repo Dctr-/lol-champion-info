@@ -7,9 +7,13 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,6 +24,7 @@ public class IndividualChampionController {
     private Champion champion;
     private Scene parent;
     private ArrayList<Spell> spellsList;
+    private ArrayList<Skin> skinsList;
     private Info info;
 
     Gson gson = new Gson(); //Parsing object
@@ -43,6 +48,7 @@ public class IndividualChampionController {
     @FXML private Label attackDamageValue;
     @FXML private Label abilityPowerValue;
     @FXML private Label defenseValue;
+    @FXML private TilePane skinsTilePane;
 
     @FXML
     private void initialize () {
@@ -89,6 +95,20 @@ public class IndividualChampionController {
         attackDamageValue.setText(Integer.toString(info.getAttack()));
         abilityPowerValue.setText(Integer.toString(info.getMagic()));
         defenseValue.setText(Integer.toString(info.getDefense()));
+
+        skinsTilePane.getChildren().clear();
+
+        for (Skin skin: skinsList
+             ) {
+            Label newLabel = new Label(skin.getName());
+            newLabel.setGraphic(new ImageView(new Image("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getId() + "_" + skin.getNum() + ".jpg", 51, 93, true, false)));
+            newLabel.setContentDisplay(ContentDisplay.TOP);
+
+            Pane newPane = new Pane();
+            newPane.getChildren().add(newLabel);
+
+            skinsTilePane.getChildren().add(newPane);
+        }
     }
 
     private void getStats () {
@@ -97,11 +117,14 @@ public class IndividualChampionController {
         jsonObject = jsonObject.getAsJsonObject("data");
         jsonObject = jsonObject.getAsJsonObject(champion.getId());
 
+        JsonArray skinJson = jsonObject.getAsJsonArray("skins");
         JsonArray spellJson = jsonObject.getAsJsonArray("spells");
         JsonObject infoJson = jsonObject.getAsJsonObject("info");
 
         this.info = gson.fromJson(infoJson, Info.class);
         this.spellsList = createSpellList(spellJson);
+        this.skinsList = createSkinList(skinJson);
+        this.skinsList.remove(0); //Removes the default skin, which is already shown in the main splash art
     }
 
     private ArrayList<Spell> createSpellList (JsonArray spellJSON) {
@@ -113,6 +136,17 @@ public class IndividualChampionController {
         }
 
         return spellList;
+    }
+
+    private ArrayList<Skin> createSkinList (JsonArray skinJson) {
+        ArrayList<Skin> skinList = new ArrayList<>();
+        for (JsonElement skin: skinJson
+             ) {
+            JsonObject object = skin.getAsJsonObject();
+            skinList.add(gson.fromJson(object, Skin.class));
+        }
+
+        return skinList;
     }
 
     /* Attempting to download ability image on first call
