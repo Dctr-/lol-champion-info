@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -27,8 +28,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         setPrimaryStage(primaryStage);
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
-        primaryStage.setTitle("LOL-Champion-Info");
-        primaryStage.setScene(new Scene(root, 600, 700));
+        primaryStage.setTitle("Champion Info");
+        // primaryStage.getIcons().add(new Image("file:icon.png")); set icon, need to get location
+        Scene newScene = new Scene(root, 600, 700);
+        newScene.getStylesheets().add("style.css");
+        primaryStage.setScene(newScene);
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

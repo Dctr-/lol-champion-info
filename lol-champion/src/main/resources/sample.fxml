@@ -16,14 +16,14 @@
     <children>
         <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
             <children>
-                <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="14.0" prefHeight="27.0" prefWidth="297.0" text="League of Legends Champion Info">
+                <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="14.0" prefHeight="27.0" prefWidth="360.0" styleClass="mainTitle" text="League of Legends Champion Info">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <TextField fx:id="championSearchBar" layoutX="139.0" layoutY="51.0" prefHeight="25.0" prefWidth="222.0" promptText="Search..." />
-                <Label fx:id="sortByLabel" layoutX="98.0" layoutY="83.0" text="Sort By:" />
-                <ComboBox fx:id="sortComboBox" layoutX="145.0" layoutY="79.0" prefWidth="150.0" promptText="Default" />
+                <TextField fx:id="championSearchBar" layoutX="125.0" layoutY="49.0" prefHeight="25.0" prefWidth="250.0" promptText="Search..." />
+                <Label fx:id="sortByLabel" layoutX="144.0" layoutY="85.0" text="Sort By:" />
+                <ComboBox fx:id="sortComboBox" layoutX="200.0" layoutY="81.0" prefWidth="150.0" promptText="Default" />
                 <ScrollPane fx:id="championScrollPane" hbarPolicy="NEVER" layoutX="34.0" layoutY="116.0" prefHeight="559.0" prefWidth="432.0">
                     <content>
                         <TilePane fx:id="championTilePane" prefHeight="558.0" prefWidth="417.0" />
