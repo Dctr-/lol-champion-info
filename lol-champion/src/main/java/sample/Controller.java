@@ -7,37 +7,27 @@ import com.google.gson.JsonParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.util.Pair;
-import javax.imageio.ImageIO;
-import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
-    ArrayList<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
+    List<Champion> allChampions = new ArrayList<>(); //Creates an array of champion objects, alphabetical order
     //Initializers
     @FXML private ComboBox<String> sortComboBox;
     @FXML private TextField championSearchBar;
@@ -53,19 +43,7 @@ public class Controller {
 
     @FXML
     private void initialize() {
-        Gson gson = new Gson(); //Parsing object
-
-        JsonElement jelement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json"));
-        JsonObject jobject = jelement.getAsJsonObject();
-        jobject = jobject.getAsJsonObject("data");
-
-        Set<Map.Entry<String, JsonElement>> mySet = jobject.entrySet(); //https://www.physicsforums.com/threads/java-entryset-iterator.740478/
-        System.out.println("mySet as 'key : value'");
-        for (Map.Entry<String, JsonElement> singleItem : mySet) {
-            Champion newChampion = gson.fromJson(singleItem.getValue(), Champion.class);
-            allChampions.add(newChampion);
-            System.out.println(singleItem.getKey() + " : " + singleItem.getValue());
-        }
+        allChampions = getChampionData();
 
         loadImages();
 
@@ -103,10 +81,53 @@ public class Controller {
         });
     }
 
+    private List<Champion> getChampionData() {
+        //TODO parallelize
+        Gson gson = new Gson(); //Parsing object
+        List<Champion> champions = new ArrayList<>();
+
+        JsonElement jelement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json"));
+        JsonObject jobject = jelement.getAsJsonObject();
+        jobject = jobject.getAsJsonObject("data");
+
+        // Pull champion names
+        Set<Map.Entry<String, JsonElement>> mySet = jobject.entrySet();
+        List<String> championNames = new ArrayList<>();
+        for (Map.Entry<String, JsonElement> singleItem : mySet) {
+            //Champion newChampion = gson.fromJson(singleItem.getValue(), Champion.class);
+            //allChampions.add(newChampion);
+            championNames.add(singleItem.getKey());
+        }
+
+        // Pull champion info
+        for (String championName : championNames) {
+            JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            jsonObject = jsonObject.getAsJsonObject("data");
+            jsonObject = jsonObject.getAsJsonObject(championName);
+
+            champions.add(gson.fromJson(jsonObject, Champion.class));
+        }
+
+        return champions;
+    }
+
     private void loadImages() {
         for (Champion champion : allChampions) {
-            ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png", champion.getId() + "_icon", 75, 75);
+            ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getName() + ".png", champion.getName() + "_icon", 75, 75);
+            ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getName() + "_0.jpg", champion.getName() + "_splash", 154, 280);
+            for (Skin skin : champion.getSkins()) {
+                ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getName() + "_" + skin.getNum() + ".jpg", champion.getName() + "_" + skin.getNum(), 51, 93);
+            }
         }
+
+        ImageManager.queueImageDownload("https://i.imgur.com/DSk0MzV.jpg", "Champion_Q", 30, 30);
+        ImageManager.queueImageDownload("https://i.imgur.com/N6eTOxI.jpg", "Champion_W", 30, 30);
+        ImageManager.queueImageDownload("https://i.imgur.com/cJw5lB9.jpg", "Champion_E", 30, 30);
+        ImageManager.queueImageDownload("https://i.imgur.com/uTHV0A6.jpg", "Champion_R", 30, 30);
+        ImageManager.queueImageDownload("https://i.imgur.com/oTVnrLb.png", "Attack_Damage", 50, 50);
+        ImageManager.queueImageDownload("https://i.imgur.com/ZcNgPR5.png", "Ability_Power", 50, 50);
+        ImageManager.queueImageDownload("https://i.imgur.com/VmmAxmC.png", "Defense", 50, 50);
 
         ImageManager.startImageDownload();
     }
@@ -114,7 +135,7 @@ public class Controller {
     private void searchTilePanes (String newValue) {
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
-            if (champion.getId().toLowerCase().contains(newValue.toLowerCase())) {
+            if (champion.getName().toLowerCase().contains(newValue.toLowerCase())) {
                 iconDisplay(champion);
             }
         }
@@ -130,8 +151,8 @@ public class Controller {
     }
 
     private void iconDisplay(Champion champion){
-        Label newLabel = new Label(champion.getId());
-        newLabel.setGraphic(championIcons.get(champion.getId()));
+        Label newLabel = new Label(champion.getName());
+        newLabel.setGraphic(championIcons.get(champion.getName()));
         newLabel.setContentDisplay(ContentDisplay.TOP);
 
         Pane newPane = new Pane();
@@ -151,8 +172,7 @@ public class Controller {
     private HashMap<String, ImageView> getChampionIcons() {
         HashMap<String, ImageView> imageViewHashMap = new HashMap<>();
         for (Champion champion : allChampions) {
-            String url = "http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getId() + ".png";
-            imageViewHashMap.put(url, ImageManager.getImage(url));
+            imageViewHashMap.put(champion.getName(), ImageManager.getImage(champion.getName() + "_icon"));
         }
         return imageViewHashMap;
     }
@@ -167,7 +187,6 @@ public class Controller {
 
         IndividualChampionController controller = individualChampionLoader.getController();
         controller.setParent(((Node) event.getSource()).getScene());
-        System.out.println("Setting champion to " + champion.getId());
         controller.setChampion(champion);
     }
 
