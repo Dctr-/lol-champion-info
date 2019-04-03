@@ -32,7 +32,6 @@ public class ImageManager {
                 findPath += "/";
             }
             findPath += "lol-champion/images/";
-            System.out.println(findPath);
             File pathDir = new File(findPath);
             if(!pathDir.exists()) {
                 Files.createDirectories(Paths.get(pathDir.toURI()));
@@ -47,13 +46,13 @@ public class ImageManager {
     /**
      * Gets the ImageView object for a previously downloaded image
      *
-     * @param url
-     *        the url matching the url from {@link ImageManager#queueImageDownload(java.lang.String, java.lang.String, java.lang.String, int, int)}
+     * @param fileName
+     *        the fileName matching the fileName from {@link ImageManager#queueImageDownload(java.lang.String, java.lang.String, int, int)}
      *
      * @return the ImageView corresponding to the URL, if the image doesn't exist null will be returned
      */
-    public static ImageView getImage(String url) {
-        return imageMap.getOrDefault(url, null);
+    public static ImageView getImage(String fileName) {
+        return imageMap.getOrDefault(fileName, null);
     }
 
 
@@ -64,10 +63,7 @@ public class ImageManager {
      *        the url matching an image to be downloaded
      *
      * @param fileName
-     *        the name the file will be saved locally under
-     *
-     * @param fileExtension
-     *        an image file extension in the form 'png'
+     *        the name the file will be saved locally under, without extension
      *
      * @param width
      *        the expected width of the image
@@ -75,12 +71,13 @@ public class ImageManager {
      * @param height
      *        the expected height of the image
      */
-    public static void queueImageDownload(String url, String fileName, String fileExtension, int width, int height) {
+    public static void queueImageDownload(String url, String fileName, int width, int height) {
         tasks.add(() -> {
+            String fileExtension = url.substring(url.lastIndexOf(".") + 1);
             ImageView imageView;
             File icon = new File(path + fileName + "." + fileExtension);
             if(!icon.exists()) {
-                Image newImage = new Image(url + "." + fileExtension, 75, 75, true, false);
+                Image newImage = new Image(url, width, height, true, false);
                 imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
                 File imageFile = new File(path + fileName + "." + fileExtension);
                 if(!imageFile.getParentFile().exists()) {
@@ -90,7 +87,7 @@ public class ImageManager {
             } else {
                 imageView = new ImageView(new Image(icon.toURI().toString()));
             }
-            return new Pair(url, imageView);
+            return new Pair(fileName, imageView);
         });
     }
 
