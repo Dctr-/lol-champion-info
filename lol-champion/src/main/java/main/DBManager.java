@@ -3,6 +3,8 @@ package main;
 import main.champion.Champion;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBManager {
 
@@ -92,21 +94,21 @@ public class DBManager {
         }
     }
 
-    public String queryFavourites(String championName){
-        String curChamp = "";
+    // method to return list of current favourites in db
+    public List<String> queryFavourites(){
+        List<String> favourites = new ArrayList<>();
         String sql = "SELECT name FROM favourites";
 
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, championName);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                curChamp = rs.getString("name");
+                favourites.add(rs.getString("name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return curChamp;
+        return favourites;
 
 
     }

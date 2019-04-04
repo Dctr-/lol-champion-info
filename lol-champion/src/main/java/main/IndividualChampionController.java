@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class IndividualChampionController {
     private Champion champion;
@@ -62,12 +63,19 @@ public class IndividualChampionController {
 
         // add champ to favourites
         favouriteButton.setOnAction(e -> {
-            // add champ name to db
-            System.out.println("Db entry");
             DBManager db = Main.getDbManager();
-            // ensure no duplicates
-            // System.out.println(db.queryFavourites(champion.getName()));
-            db.insertFavourite(champion);
+
+            // ensure no duplicates by getting all current favourites
+            List<String> favourites = db.queryFavourites();
+            // comparing clicked fav to values
+            Boolean inList = false;
+            for (String favourite : favourites){
+                if (champion.getName().equals(favourite)){inList = true;}
+            }
+            // if it's not currently in the db then favourite it
+            if (!inList){
+                db.insertFavourite(champion);
+            }
         });
     }
 
