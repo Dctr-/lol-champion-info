@@ -58,7 +58,7 @@ public class Controller {
         championIcons = getChampionIcons();
 
         sortComboBox.setItems(FXCollections.observableArrayList( //Creates a list containing each class of main.champion for the dropdown menu
-                "Default",
+                "All",
                 "Favorites",
                 "Assassin",
                 "Fighter",
@@ -82,7 +82,7 @@ public class Controller {
         // combobox sort selection has been made, update champs
         sortComboBox.setOnAction(e -> {
             String filter = sortComboBox.getValue();
-            if (filter.equals("Default")){
+            if (filter.equals("All")){
                 searchTilePanes("");
             } else { sortTilePanes(filter); }
         });

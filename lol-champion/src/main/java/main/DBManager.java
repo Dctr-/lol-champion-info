@@ -11,11 +11,20 @@ public class DBManager {
         try {
             conn = getConnection();
 
+            // champion data table
             Statement statement = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS champions (\n"
                     + " id INTEGER PRIMARY KEY,\n"
                     + " name text NOT NULL,\n"
                     + " data blob NOT NULL\n"
+                    + ");";
+            statement.execute(sql);
+
+            // favourite table
+            statement = conn.createStatement();
+            sql = "CREATE TABLE IF NOT EXISTS favourites (\n"
+                    + " id INTEGER PRIMARY KEY,\n"
+                    + " name text NOT NULL\n"
                     + ");";
             statement.execute(sql);
 
@@ -71,5 +80,34 @@ public class DBManager {
             e.printStackTrace();
         }
         return conn;
+    }
+
+    public void insertFavourite(Champion champion){
+        String sql = "INSERT INTO favourites(name) VALUES(?)";
+        try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, champion.getName());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String queryFavourites(String championName){
+        String curChamp = "";
+        String sql = "SELECT name FROM favourites";
+
+        try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, championName);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                curChamp = rs.getString("name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return curChamp;
+
+
     }
 }

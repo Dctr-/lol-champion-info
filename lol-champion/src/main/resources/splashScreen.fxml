@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="loadingScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="loadingScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.splashController">
    <children>
       <Label layoutX="116.0" layoutY="116.0" prefHeight="47.0" prefWidth="268.0" text="League of Legends" textAlignment="CENTER">
          <font>
@@ -19,7 +19,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="216.0" layoutY="527.0" text="Loading..." textAlignment="CENTER">
+      <Label fx:id="loadingLabel" layoutX="216.0" layoutY="527.0" text="Loading..." textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>

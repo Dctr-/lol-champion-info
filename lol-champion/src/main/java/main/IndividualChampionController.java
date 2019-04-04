@@ -1,5 +1,6 @@
 package main;
 
+import javafx.scene.control.RadioButton;
 import javafx.scene.text.TextAlignment;
 import main.champion.Champion;
 import main.champion.Skin;
@@ -40,6 +41,7 @@ public class IndividualChampionController {
     @FXML private Label abilityPowerValue;
     @FXML private Label defenseValue;
     @FXML private TilePane skinsTilePane;
+    @FXML private RadioButton favouriteButton;
 
     @FXML
     private void initialize () {
@@ -54,6 +56,19 @@ public class IndividualChampionController {
             }
         });
         skinsTilePane.setHgap(6);
+
+        // check to see if button should be filled for champ
+        favouriteButton.setSelected(true);
+
+        // add champ to favourites
+        favouriteButton.setOnAction(e -> {
+            // add champ name to db
+            System.out.println("Db entry");
+            DBManager db = Main.getDbManager();
+            // ensure no duplicates
+            // System.out.println(db.queryFavourites(champion.getName()));
+            db.insertFavourite(champion);
+        });
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
