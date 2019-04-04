@@ -1,7 +1,9 @@
 package sample;
 
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.application.Preloader;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +14,7 @@ import javafx.stage.WindowEvent;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        launch(args);
+        LauncherImpl.launchApplication(Main.class, SplashPreloader.class, args);
     }
 
     private static Stage primaryStage;
@@ -27,9 +29,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         setPrimaryStage(primaryStage);
+        // load first controller, heavy lifting
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+        LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(100)); // send finished loading ping to preloader
+
         primaryStage.setTitle("Champion Info");
-        // primaryStage.getIcons().add(new Image("file:icon.png")); set icon, need to get location
         Scene newScene = new Scene(root, 600, 700);
         newScene.getStylesheets().add("style.css");
         primaryStage.setScene(newScene);
