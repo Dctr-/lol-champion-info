@@ -1,5 +1,6 @@
 package main;
 
+import javafx.scene.text.TextAlignment;
 import main.champion.Champion;
 import main.champion.Skin;
 import javafx.event.ActionEvent;
@@ -52,6 +53,7 @@ public class IndividualChampionController {
                 }
             }
         });
+        skinsTilePane.setHgap(6);
     }
 
     public void changeScreen(ActionEvent event) throws IOException {
@@ -88,7 +90,28 @@ public class IndividualChampionController {
         skinsTilePane.getChildren().clear();
 
         for (Skin skin : champion.getSkins()) {
-            Label newLabel = new Label(skin.getName());
+            String[] skinNameSplit = skin.getName().split(" ");
+            Label newLabel = new Label();
+
+            newLabel.setTextAlignment(TextAlignment.CENTER);
+            switch (skinNameSplit.length) {
+                case 0:
+                    newLabel.setText(skin.getName());
+                    break;
+                case 1:
+                    newLabel.setText(skinNameSplit[0]);
+                    break;
+                case 2:
+                    newLabel.setText(skinNameSplit[0] + "\n" + skinNameSplit[1]);
+                    break;
+                case 3:
+                    newLabel.setText(skinNameSplit[0] +" " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
+                    break;
+                default:
+                    newLabel.setText(skin.getName());
+                    break;
+            }
+
             newLabel.setGraphic(ImageManager.getImage(champion.getName() + "_" + skin.getNum()));
             newLabel.setContentDisplay(ContentDisplay.TOP);
 
