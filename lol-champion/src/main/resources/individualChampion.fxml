@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.IndividualChampionController">
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.IndividualChampionController">
     <children>
         <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
             <children>
@@ -62,12 +63,16 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TilePane fx:id="skinsTilePane" alignment="CENTER" layoutX="14.0" layoutY="382.0" prefHeight="307.0" prefWidth="473.0" />
-            <Label fx:id="lblSkins" layoutX="232.0" layoutY="370.0" text="Skins">
+            <Label fx:id="lblSkins" layoutX="232.0" layoutY="398.0" text="Skins">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+            <ScrollPane fx:id="skinsScrollPane" hbarPolicy="ALWAYS" layoutX="21.0" layoutY="423.0" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="131.0" prefWidth="459.0" vbarPolicy="NEVER">
+               <content>
+                  <TilePane fx:id="skinsTilePane" prefHeight="114.0" prefWidth="457.0" />
+               </content>
+            </ScrollPane>
             </children>
         </AnchorPane>
     </children>

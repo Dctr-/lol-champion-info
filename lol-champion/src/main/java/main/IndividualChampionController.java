@@ -1,5 +1,6 @@
 package main;
 
+import javafx.scene.control.*;
 import javafx.scene.text.TextAlignment;
 import main.champion.Champion;
 import main.champion.Skin;
@@ -7,9 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -40,6 +38,7 @@ public class IndividualChampionController {
     @FXML private Label abilityPowerValue;
     @FXML private Label defenseValue;
     @FXML private TilePane skinsTilePane;
+    @FXML private ScrollPane skinsScrollPane;
 
     @FXML
     private void initialize () {
@@ -87,12 +86,15 @@ public class IndividualChampionController {
         abilityPowerValue.setText(Integer.toString(champion.getInfo().getMagic()));
         defenseValue.setText(Integer.toString(champion.getInfo().getDefense()));
 
-        skinsTilePane.getChildren().clear();
+        setSkins();
+    }
 
+    private void setSkins () {
+        skinsTilePane.getChildren().clear();
+        skinsTilePane.setPrefRows(1);
         for (Skin skin : champion.getSkins()) {
             String[] skinNameSplit = skin.getName().split(" ");
             Label newLabel = new Label();
-
             newLabel.setTextAlignment(TextAlignment.CENTER);
             switch (skinNameSplit.length) {
                 case 0:
@@ -105,7 +107,7 @@ public class IndividualChampionController {
                     newLabel.setText(skinNameSplit[0] + "\n" + skinNameSplit[1]);
                     break;
                 case 3:
-                    newLabel.setText(skinNameSplit[0] +" " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
+                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
                     break;
                 default:
                     newLabel.setText(skin.getName());
@@ -117,7 +119,6 @@ public class IndividualChampionController {
 
             Pane newPane = new Pane();
             newPane.getChildren().add(newLabel);
-
             skinsTilePane.getChildren().add(newPane);
         }
     }

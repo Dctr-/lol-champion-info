@@ -162,10 +162,10 @@ public class Controller {
         ImageManager.startImageDownload();
     }
 
-    private void searchTilePanes (String newValue) {
+    private void searchTilePanes (String keyword) {
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
-            if (champion.getName().toLowerCase().contains(newValue.toLowerCase())) {
+            if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
                 iconDisplay(champion);
             }
         }
