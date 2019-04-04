@@ -1,6 +1,8 @@
-package sample;
+package main.champion;
 
-public class Info {
+import java.io.Serializable;
+
+public class Info implements Serializable {
     private int attack, defense, magic, difficulty;
 
     public Info (int attack, int defense, int magic, int difficulty) {

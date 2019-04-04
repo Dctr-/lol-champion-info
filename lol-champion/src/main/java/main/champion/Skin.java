@@ -1,6 +1,8 @@
-package sample;
+package main.champion;
 
-public class Skin {
+import java.io.Serializable;
+
+public class Skin implements Serializable {
     private String name;
     private int num;
 

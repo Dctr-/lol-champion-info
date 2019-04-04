@@ -2,7 +2,7 @@
     -fx-background-color: linear-gradient(#93a5cf, #e4efe9);
 }
 
-/* Styling main champion list */
+/* Styling main main.champion list */
 .scroll-pane {
     -fx-background-color: linear-gradient(#f5f7fa, #c3cfe2);
     -fx-border-radius: 1px;
@@ -27,7 +27,7 @@
     -fx-background-color: transparent;
 }
 
-/* Main title themeing */
+/* main.Main title themeing */
 .mainTitle {
     -fx-font-size: 22px;
     -fx-font-weight: bold;

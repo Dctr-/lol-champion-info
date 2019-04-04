@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -22,26 +22,7 @@ public class ImageManager {
     private static java.util.List<Callable<Pair<String, ImageView>>> tasks = new ArrayList<>();
 
     private static HashMap<String, ImageView> imageMap = new HashMap<>();
-    private static String path = "";
-
-    static {
-        String findPath = "";
-        try {
-            findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
-            if(!findPath.endsWith("/")) {
-                findPath += "/";
-            }
-            findPath += "lol-champion/images/";
-            File pathDir = new File(findPath);
-            if(!pathDir.exists()) {
-                Files.createDirectories(Paths.get(pathDir.toURI()));
-            }
-            path = findPath;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    private static String path = Main.getApplicationPath() + "images/";
 
     /**
      * Gets the ImageView object for a previously downloaded image
@@ -57,7 +38,7 @@ public class ImageManager {
 
 
     /**
-     * Queues an image to be later downloaded with {@link sample.ImageManager#startImageDownload()}
+     * Queues an image to be later downloaded with {@link ImageManager#startImageDownload()}
      *
      * @param url
      *        the url matching an image to be downloaded
@@ -78,7 +59,7 @@ public class ImageManager {
             File icon = new File(path + fileName + "." + fileExtension);
             if(!icon.exists()) {
                 Image newImage = new Image(url, width, height, true, false);
-                imageView = new ImageView(newImage); //Creates the image of champion, pulled from riot website
+                imageView = new ImageView(newImage); //Creates the image of main.champion, pulled from riot website
                 File imageFile = new File(path + fileName + "." + fileExtension);
                 if(!imageFile.getParentFile().exists()) {
                     imageFile.getParentFile().mkdirs();
@@ -105,5 +86,9 @@ public class ImageManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getPath() {
+        return path;
     }
 }
