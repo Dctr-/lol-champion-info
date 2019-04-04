@@ -1,9 +1,10 @@
 package main.champion;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Champion {
+public class Champion implements Serializable {
     private String id, title, blurb;
     private int key, difficulty;
     private List<String> tags;
@@ -57,5 +58,19 @@ public class Champion {
 
     public List<Spell> getSpells() {
         return spells;
+    }
+
+    public byte[] serialize() throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream out = new ObjectOutputStream(bos);
+        out.writeObject(this);
+        out.close();
+        return bos.toByteArray();
+    }
+
+    public static Champion deserialize(byte[] data) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+        ObjectInputStream in = new ObjectInputStream(bis);
+        return (Champion)in.readObject();
     }
 }

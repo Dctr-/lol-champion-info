@@ -23,6 +23,7 @@ import javafx.scene.layout.TilePane;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
@@ -102,27 +103,40 @@ public class Controller {
             championNames.add(singleItem.getKey());
         }
 
-        ExecutorService pool = Executors.newFixedThreadPool(20);
-        java.util.List<Callable<Champion>> tasks = new ArrayList<>();
+        // only parse data if it doesn't exists in the db
+        DBManager db = Main.getDbManager();
+        if(db.queryChampion(championNames.get(0)) == null) {
+            ExecutorService pool = Executors.newFixedThreadPool(20);
+            java.util.List<Callable<Champion>> tasks = new ArrayList<>();
 
-        // Pull main.champion info
-        for (String championName : championNames) {
-            tasks.add(() -> {
-                JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
-                JsonObject jsonObject = jsonElement.getAsJsonObject();
-                jsonObject = jsonObject.getAsJsonObject("data");
-                jsonObject = jsonObject.getAsJsonObject(championName);
+            // Pull main.champion info
+            for (String championName : championNames) {
+                tasks.add(() -> {
+                    JsonElement jsonElement = new JsonParser().parse(jsonGetRequest("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/" + championName + ".json"));
+                    JsonObject jsonObject = jsonElement.getAsJsonObject();
+                    jsonObject = jsonObject.getAsJsonObject("data");
+                    jsonObject = jsonObject.getAsJsonObject(championName);
 
-                return gson.fromJson(jsonObject, Champion.class);
-            });
-        }
-
-        try {
-            for (Future<Champion> championFuture : pool.invokeAll(tasks)) {
-                champions.add(championFuture.get());
+                    return gson.fromJson(jsonObject, Champion.class);
+                });
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            try {
+                for (Future<Champion> championFuture : pool.invokeAll(tasks)) {
+                    champions.add(championFuture.get());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // insert into DB
+            for (Champion champion : champions) {
+                db.insertChampion(champion);
+            }
+        } else {
+            for (String championName : championNames) {
+                champions.add(db.queryChampion(championName));
+            }
         }
 
         return champions;
@@ -229,5 +243,4 @@ public class Controller {
     private String streamToString(InputStream inputStream) {
         return new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
     }
-
 }

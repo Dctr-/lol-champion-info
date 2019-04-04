@@ -9,9 +9,43 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class Main extends Application {
+
+    private static String applicationPath;
+    private static DBManager dbManager;
+
     public static void main(String[] args) {
+        findApplicationPath();
+
+        dbManager = new DBManager();
+
         launch(args);
+    }
+
+    private static void findApplicationPath() {
+        String findPath = "";
+        try {
+            findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
+            if(!findPath.endsWith("/")) {
+                findPath += "/";
+            }
+            findPath += "lol-champion/";
+            File pathDir = new File(findPath);
+            if(!pathDir.exists()) {
+                Files.createDirectories(Paths.get(pathDir.toURI()));
+            }
+            applicationPath = findPath;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static Stage primaryStage;
@@ -43,4 +77,11 @@ public class Main extends Application {
         });
     }
 
+    public static String getApplicationPath() {
+        return applicationPath;
+    }
+
+    public static DBManager getDbManager() {
+        return dbManager;
+    }
 }
