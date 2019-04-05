@@ -28,7 +28,5 @@
                 <Font name="ROGFontsv1.6-Regular" size="28.0" />
             </font>
         </Label>
-        <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" layoutX="150.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="loadingGif" fitHeight="150.0" fitWidth="200.0" layoutX="150.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </Pane>
