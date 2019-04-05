@@ -209,6 +209,12 @@ public class Controller {
         }
     }
 
+     /**
+     * Sorts through all champions and applies filter based on sort chosen in combobox.
+     * Favourite filter gets stored in db and is unique to the program, saves after close.
+     *
+     * @param filterSelected  filter that chosen in the combobox.
+     */
     public void sortTilePanes(String filterSelected) {
         sorted = true;
         championTilePane.getChildren().clear();
@@ -229,7 +235,10 @@ public class Controller {
         }
     }
 
-    // if you have favourites selected and remove it, need to update the tilepane to remove the champ
+     /**
+     * Method to update favourites section on back button click, accessed in the champion controller. In
+     * situation where user un-favorites a champion, this will ensure it updates.
+     */
     public void backButtonUpdate() {
         if (currentSort.equals("Favorites")) {
             sortTilePanes(currentSort);
