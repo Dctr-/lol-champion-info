@@ -18,7 +18,7 @@
                 <Font name="ROGFontsv1.6-Regular" size="41.0" />
             </font>
         </Label>
-        <Label layoutX="150.0" layoutY="163.0" prefHeight="45.0" prefWidth="200.0" text="Champion Info" textAlignment="CENTER">
+        <Label layoutX="147.0" layoutY="169.0" prefHeight="46.0" prefWidth="206.0" text="Champion Info" textAlignment="CENTER">
             <font>
                 <Font name="ROGFontsv1.6-Regular" size="31.0" />
             </font>

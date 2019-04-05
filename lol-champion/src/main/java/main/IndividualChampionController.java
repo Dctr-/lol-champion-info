@@ -131,7 +131,7 @@ public class IndividualChampionController {
 
     private void setSkins () {
         double totalWidth = 0;
-        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6));
+        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6) + 40);
         skinsTilePane.getChildren().clear();
 
         for (Skin skin : champion.getSkins()) {

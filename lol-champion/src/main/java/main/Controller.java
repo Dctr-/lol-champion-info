@@ -187,7 +187,7 @@ public class Controller {
         ImageManager.queueImageDownload("https://i.imgur.com/yTQnTsV.png", "Champion_R", 30, 30);
         ImageManager.queueImageDownload("https://i.imgur.com/5ktSs91.png", "Attack_Damage", 50, 50);
         ImageManager.queueImageDownload("https://i.imgur.com/ZcNgPR5.png", "Ability_Power", 50, 50);
-        ImageManager.queueImageDownload("https://i.imgur.com/1tWwgwq.png", "Defense", 50, 50);
+        ImageManager.queueImageDownload("https://i.imgur.com/fhodcWm.png", "Defense", 50, 50);
 
         ImageManager.startImageDownload();
     }
