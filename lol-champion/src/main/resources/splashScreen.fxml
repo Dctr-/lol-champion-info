@@ -13,19 +13,19 @@
 
 <Pane fx:id="loadingScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SplashController">
     <children>
-        <Label layoutX="116.0" layoutY="116.0" prefHeight="47.0" prefWidth="268.0" text="League of Legends" textAlignment="CENTER">
+        <Label layoutX="69.0" layoutY="115.0" prefHeight="77.0" prefWidth="362.0" text="League of Legends" textAlignment="CENTER">
             <font>
-                <Font size="32.0" />
+                <Font name="ROGFontsv1.6-Regular" size="41.0" />
             </font>
         </Label>
-        <Label layoutX="170.0" layoutY="163.0" prefHeight="39.0" prefWidth="160.0" text="Champion Info" textAlignment="CENTER">
+        <Label layoutX="150.0" layoutY="163.0" prefHeight="45.0" prefWidth="200.0" text="Champion Info" textAlignment="CENTER">
             <font>
-                <Font size="24.0" />
+                <Font name="ROGFontsv1.6-Regular" size="31.0" />
             </font>
         </Label>
-        <Label fx:id="loadingLabel" layoutX="216.0" layoutY="527.0" text="Loading..." textAlignment="CENTER">
+        <Label fx:id="loadingLabel" layoutX="193.0" layoutY="517.0" prefHeight="50.0" prefWidth="114.0" text="Loading" textAlignment="CENTER">
             <font>
-                <Font size="16.0" />
+                <Font name="ROGFontsv1.6-Regular" size="28.0" />
             </font>
         </Label>
         <ImageView fx:id="loadingIcon" fitHeight="150.0" fitWidth="200.0" layoutX="150.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
