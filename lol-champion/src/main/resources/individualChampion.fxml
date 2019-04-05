@@ -10,7 +10,7 @@
     <children>
         <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
             <children>
-                <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+                <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt;-- Back" />
             <Label fx:id="championName" layoutX="35.0" layoutY="46.0" prefHeight="30.0" prefWidth="447.0" text="Champion Name + Blurb">
                <font>
                   <Font size="20.0" />

@@ -37,3 +37,36 @@
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
+
+.button {
+    -fx-background-color: transparent;
+    -fx-opacity: 70%;
+    -fx-border-color: grey;
+    -fx-border-radius: 4;
+}
+
+.button:hover{
+    -fx-opacity: 100%;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 8, 0.0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.radio-button{
+    -fx-background-color: transparent;
+    -fx-opacity: 75%;
+    -fx-border-color: grey;
+    -fx-padding: 7px;
+    -fx-border-radius: 4;
+}
+
+.radio-button:hover {
+    -fx-opacity: 100%;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 8, 0.0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.radio-button:selected {
+    -fx-opacity: 100%;
+    -fx-border-color: #DAA520;
+    -fx-effect: dropshadow(three-pass-box, rgba(218,165, 32, 0.6), 8, 0.0, 0, 0);
+}
