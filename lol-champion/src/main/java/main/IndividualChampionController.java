@@ -126,62 +126,65 @@ public class IndividualChampionController {
     private void setData() {
         championName.setText(champion.getName() + " " + champion.getTitle()); //Concatenates the champion name with their small blurb
         championSplash.setImage(ImageManager.getImage(champion.getName() + "_splash").getImage()); //Sets the Splash Art in the top left, showing default champion image
-        qAbilityLabel.setText(champion.getSpells().get(0).getName());
+        qAbilityLabel.setText(champion.getSpells().get(0).getName()); //Gets spell names
         wAbilityLabel.setText(champion.getSpells().get(1).getName());
         eAbilityLabel.setText(champion.getSpells().get(2).getName());
         rAbilityLabel.setText(champion.getSpells().get(3).getName());
-        qImg.setImage(ImageManager.getImage("Champion_Q").getImage());
+        qImg.setImage(ImageManager.getImage("Champion_Q").getImage()); //Adds images for Q W E R
         wImg.setImage(ImageManager.getImage("Champion_W").getImage());
         eImg.setImage(ImageManager.getImage("Champion_E").getImage());
         rImg.setImage(ImageManager.getImage("Champion_R").getImage());
-        attackDamageIcon.setImage(ImageManager.getImage("Attack_Damage").getImage());
+        attackDamageIcon.setImage(ImageManager.getImage("Attack_Damage").getImage()); //Transparent art for attack, ability power, and defense
         abilityPowerIcon.setImage(ImageManager.getImage("Ability_Power").getImage());
         defenseIcon.setImage(ImageManager.getImage("Defense").getImage());
-        attackDamageValue.setText(Integer.toString(champion.getInfo().getAttack()));
+        attackDamageValue.setText(Integer.toString(champion.getInfo().getAttack())); //Sets the values for attack, ability power, and defense
         abilityPowerValue.setText(Integer.toString(champion.getInfo().getMagic()));
         defenseValue.setText(Integer.toString(champion.getInfo().getDefense()));
 
-        setSkins();
+        setSkins(); //Calls on method to set the skins for the champion
     }
 
+    /**
+     * Adds the current Champions skins to the tilePane
+     */
     private void setSkins () {
-        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6) + 40);
-        skinsTilePane.getChildren().clear();
+        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6) + 40); //Multiplies the number of skins by (Image Width +  TilePane Gap +  Wiggle Room) to scale the tilePane properly
+        skinsTilePane.getChildren().clear(); //Clears the existing skins, to replace them with the new champions skins
 
-        for (Skin skin : champion.getSkins()) {
-            String[] skinNameSplit = skin.getName().split(" ");
+        for (Skin skin : champion.getSkins()) { //Cycles through each skin in the Champion objects list of skins
+            String[] skinNameSplit = skin.getName().split(" "); //Splits the skin name up based on spaces for proper formatting
             Label newLabel = new Label();
-            newLabel.setTextAlignment(TextAlignment.CENTER);
-            switch (skinNameSplit.length) {
-                case 0:
-                    newLabel.setText(skin.getName());
-                    break;
-                case 1:
-                    newLabel.setText(skinNameSplit[0]);
-                    break;
-                case 2:
-                    newLabel.setText(skinNameSplit[0] + "\n" + skinNameSplit[1]);
-                    break;
-                case 3:
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
-                    break;
-                case 4:
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3]);
-                    break;
-                case 5:
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3] + "\n" + skinNameSplit[4]);
-                default:
-                    newLabel.setText(skin.getName());
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3] + "\n" + skinNameSplit[4]);
-                    break;
-            }
+            newLabel.setTextAlignment(TextAlignment.CENTER); //Makes the text align to the middle of the label
 
-            newLabel.setGraphic(ImageManager.getImage(champion.getName() + "_" + skin.getNum()));
-            newLabel.setContentDisplay(ContentDisplay.TOP);
+            newLabel.setText(constructSkinName(skinNameSplit)); //Sets the labels text to a string created by the constructSkinName method
+
+            newLabel.setGraphic(ImageManager.getImage(champion.getName() + "_" + skin.getNum())); //Sets the graphic to the champions skin graphic, based on skin name
+            newLabel.setContentDisplay(ContentDisplay.TOP); //Makes the image display on the top, text below
 
             Pane newPane = new Pane();
-            newPane.getChildren().add(newLabel);
-            skinsTilePane.getChildren().add(newPane);
+            newPane.getChildren().add(newLabel); //Adds the label to a pane
+            skinsTilePane.getChildren().add(newPane); //Adds the pane to the skinsTilePane
         }
+    }
+
+    /**
+     * Constructs a formatted String to display below a Champion skin image
+     *
+     * @param skinNameSplit String array containing individual words within a champion name, in order
+     * @return Formatted String with spaces and new line every two words
+     */
+    private String constructSkinName (String[] skinNameSplit) {
+        String name = "";
+        int i = 0;
+
+        for (String subString : skinNameSplit //Cycles through each word in the champion skin name array
+             ) {
+            name += subString + " "; //Adds the word, followed by a space
+            ++i;
+            if (i%2 == 0) //Every two words, appends a new line, therefore text doesn't extend past the image width
+                name += "\n";
+        }
+
+        return name; //Returns the formatted name to display below the champion
     }
 }
