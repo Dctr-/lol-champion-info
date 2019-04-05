@@ -22,7 +22,7 @@ public class DBManager {
                     + ");";
             statement.execute(sql);
 
-            // favourite table
+            // favourite table, unique id & string name are only two columns
             statement = conn.createStatement();
             sql = "CREATE TABLE IF NOT EXISTS favourites (\n"
                     + " id INTEGER PRIMARY KEY,\n"
@@ -84,6 +84,11 @@ public class DBManager {
         return conn;
     }
 
+    /**
+    * method to insert a new favourite into the favourites db, passed in a champion object and will insert solely name
+    *
+    * @param champion  champion you wish to be favourited
+    */
     public void insertFavourite(Champion champion) {
         String sql = "INSERT INTO favourites(name) VALUES(?)";
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -94,6 +99,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * method to remove a favourite from the db, passed in a champion object and will remove name
+     *
+     * @param champion  champion you wish to be removed
+     */
     public void removeFavourite(Champion champion) {
         String sql = "DELETE FROM favourites WHERE name = ?";
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -104,7 +114,9 @@ public class DBManager {
         }
     }
 
-    // method to return list of current favourites in db
+    /**
+     * Returns a list of strings of currently favourited champions
+     */
     public List<String> queryFavourites() {
         List<String> favourites = new ArrayList<>();
         String sql = "SELECT name FROM favourites";
@@ -112,6 +124,7 @@ public class DBManager {
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                // append each name to the favourites list
                 favourites.add(rs.getString("name"));
             }
         } catch (Exception e) {

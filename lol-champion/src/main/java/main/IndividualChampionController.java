@@ -79,6 +79,10 @@ public class IndividualChampionController {
         skinsTilePane.setHgap(6);
     }
 
+    /**
+     * Updates the favourite button, whether or not the champion is currently favourited and will sync settings with
+     * the db.
+     */
     private void favouriteButton() {
         // connect to db
         DBManager db = Main.getDbManager();
@@ -105,6 +109,7 @@ public class IndividualChampionController {
     // Change screen back to main menu and update the list of champs
     public void changeScreen(ActionEvent event) throws IOException {
         Main.getPrimaryStage().setScene(parent);
+        // swap stylesheets back to main css
         Main.getPrimaryStage().getScene().getStylesheets().removeAll();
         Main.getPrimaryStage().getScene().getStylesheets().add("style.css");
         parentController.backButtonUpdate();
