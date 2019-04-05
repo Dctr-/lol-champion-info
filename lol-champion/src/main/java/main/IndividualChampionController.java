@@ -1,24 +1,18 @@
 package main;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.text.TextAlignment;
-import main.champion.Champion;
-import main.champion.Skin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.TextAlignment;
+import main.champion.Champion;
+import main.champion.Skin;
 
 import java.io.IOException;
-import java.util.List;
 
 public class IndividualChampionController {
     private Champion champion;
@@ -64,14 +58,20 @@ public class IndividualChampionController {
         skinsTilePane.setHgap(6); //Sets a gap between the skin images
     }
 
+    /**
+     * Updates the favourite button, whether or not the champion is currently favourited and will sync settings with
+     * the db.
+     */
     private void favouriteButton() {
         // connect to db
         DBManager db = Main.getDbManager();
 
         // deal shading or not shading button
-        if (champion.isFavourited()){
+        if (champion.isFavourited()) {
             favouriteButton.setSelected(true);
-        } else { favouriteButton.setSelected(false); }
+        } else {
+            favouriteButton.setSelected(false);
+        }
 
         // add / remove champ to favourites on click of button
         favouriteButton.setOnAction(e -> {
@@ -95,6 +95,7 @@ public class IndividualChampionController {
      */
     public void changeScreen(ActionEvent event) throws IOException {
         Main.getPrimaryStage().setScene(parent);
+        // swap stylesheets back to main css
         Main.getPrimaryStage().getScene().getStylesheets().removeAll();
         Main.getPrimaryStage().getScene().getStylesheets().add("style.css");
         parentController.backButtonUpdate();
