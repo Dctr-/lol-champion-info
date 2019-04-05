@@ -128,6 +128,8 @@ public class IndividualChampionController {
     }
 
     private void setSkins () {
+        double totalWidth = 0;
+        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6));
         skinsTilePane.getChildren().clear();
 
         for (Skin skin : champion.getSkins()) {
@@ -137,7 +139,6 @@ public class IndividualChampionController {
             switch (skinNameSplit.length) {
                 case 0:
                     newLabel.setText(skin.getName());
-                    newLabel.setText("poop");
                     break;
                 case 1:
                     newLabel.setText(skinNameSplit[0]);
@@ -149,7 +150,7 @@ public class IndividualChampionController {
                     newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
                     break;
                 case 4:
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + skinNameSplit[3]);
+                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3]);
                     break;
                 case 5:
                     newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3] + "\n" + skinNameSplit[4]);
@@ -164,6 +165,8 @@ public class IndividualChampionController {
 
             Pane newPane = new Pane();
             newPane.getChildren().add(newLabel);
+            totalWidth += newPane.getWidth();
+            //skinsTilePane.setPrefWidth(totalWidth);
             skinsTilePane.getChildren().add(newPane);
         }
     }
