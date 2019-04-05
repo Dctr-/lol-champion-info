@@ -88,6 +88,7 @@ public class IndividualChampionController {
 
     public void changeScreen(ActionEvent event) throws IOException {
         Main.getPrimaryStage().setScene(parent);
+
     }
 
     // Accessors

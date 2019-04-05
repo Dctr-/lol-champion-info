@@ -54,6 +54,8 @@ public class Controller {
 
     private FXMLLoader individualChampionLoader;
     private Scene individualChampionScene;
+    boolean sorted = false;
+    List<Champion> curSorted = new ArrayList<>();
 
     @FXML
     private void initialize() {
@@ -92,6 +94,9 @@ public class Controller {
         sortComboBox.setOnAction(e -> {
             String filter = sortComboBox.getValue();
             if (filter.equals("All")) {
+                // reset filter, need to clear list and clear box
+                sorted = false;
+                curSorted.clear();
                 searchTilePanes("");
             } else {
                 sortTilePanes(filter);
@@ -188,14 +193,23 @@ public class Controller {
 
     private void searchTilePanes (String keyword) {
         championTilePane.getChildren().clear();
-        for (Champion champion : allChampions) {
-            if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                iconDisplay(champion);
+        if (sorted){
+            for (Champion champion : curSorted) {
+                if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                    iconDisplay(champion);
+                }
+            }
+        } else {
+            for (Champion champion : allChampions) {
+                if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                    iconDisplay(champion);
+                }
             }
         }
     }
 
     private void sortTilePanes(String filterSelected) {
+        sorted = true;
         championTilePane.getChildren().clear();
 
         for (Champion champion : allChampions) {
@@ -203,10 +217,12 @@ public class Controller {
             if (filterSelected.equals("Favorites")){
                 if (champion.isFavourited()){
                     iconDisplay(champion);
+                    curSorted.add(champion);
                 }
             } else {
                 if (champion.getTags().contains(filterSelected)) {
                     iconDisplay(champion);
+                    curSorted.add(champion);
                 }
             }
         }
