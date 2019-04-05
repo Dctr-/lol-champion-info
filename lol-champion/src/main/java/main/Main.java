@@ -64,7 +64,7 @@ public class Main extends Application {
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(100)); // send finished loading ping to preloader
 
         primaryStage.setTitle("Champion Info");
-        Scene newScene = new Scene(root, 600, 700);
+        Scene newScene = new Scene(root, 500, 700);
         newScene.getStylesheets().add("style.css");
         primaryStage.setScene(newScene);
         primaryStage.show();
