@@ -129,7 +129,7 @@ public class IndividualChampionController {
 
     private void setSkins () {
         skinsTilePane.getChildren().clear();
-        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6));
+
         for (Skin skin : champion.getSkins()) {
             String[] skinNameSplit = skin.getName().split(" ");
             Label newLabel = new Label();
@@ -152,10 +152,10 @@ public class IndividualChampionController {
                     newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + skinNameSplit[3]);
                     break;
                 case 5:
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + skinNameSplit[3] + "\n" + skinNameSplit[4]);
+                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3] + "\n" + skinNameSplit[4]);
                 default:
                     newLabel.setText(skin.getName());
-                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + skinNameSplit[3] + "\n" + skinNameSplit[4]);
+                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2] + " " + skinNameSplit[3] + "\n" + skinNameSplit[4]);
                     break;
             }
 
