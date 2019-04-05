@@ -98,7 +98,7 @@ public class Controller {
     }
 
     /**
-     * Gets the champion data by parsing RIOTGames static JSON data
+     * Gets the champion data by first checking if the data is cached in the database, otherwise from parsing RIOTGames static JSON data
      *
      * @return List of Champion objects containing unique information about each champion
      */
@@ -121,6 +121,7 @@ public class Controller {
         DBManager db = Main.getDbManager();
 
         if (db.queryChampion(championNames.get(0)) == null) {
+            // Parallelize data collection from RIOT CDN using an ExecutorService
             ExecutorService pool = Executors.newFixedThreadPool(20);
             java.util.List<Callable<Champion>> tasks = new ArrayList<>();
 
