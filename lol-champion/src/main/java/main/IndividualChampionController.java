@@ -15,9 +15,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.text.TextAlignment;
-import main.champion.Champion;
-import main.champion.Skin;
 
 import java.io.IOException;
 import java.util.List;
@@ -72,11 +69,10 @@ public class IndividualChampionController {
 
         // deal shading or not shading button
         if (champion.isFavourited()){
-            System.out.println("Favourited");
             favouriteButton.setSelected(true);
         } else { favouriteButton.setSelected(false); }
 
-        // add / remove champ to favourites
+        // add / remove champ to favourites on click of button
         favouriteButton.setOnAction(e -> {
             if (!champion.isFavourited()) {
                 db.insertFavourite(champion);
@@ -88,6 +84,7 @@ public class IndividualChampionController {
         });
     }
 
+    // Change screen back to main menu and update the list of champs
     public void changeScreen(ActionEvent event) throws IOException {
         Main.getPrimaryStage().setScene(parent);
         parentController.backButtonUpdate();

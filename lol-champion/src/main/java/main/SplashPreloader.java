@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class SplashPreloader extends Preloader {
     private Stage splashStage;
-    static SplashController mySplashController;
 
     public SplashPreloader() throws IOException {
     }
@@ -21,10 +20,6 @@ public class SplashPreloader extends Preloader {
 
 
     public void start(Stage stage) throws Exception {
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("splashScreen.fxml"));
-        // Parent root = loader.load();
-//        Scene splashScene = new Scene(root, 500, 700);
-
         this.splashStage = stage;
 
         splashScene.getStylesheets().add("splashStyle.css");
