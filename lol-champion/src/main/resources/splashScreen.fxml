@@ -23,7 +23,7 @@
                 <Font name="ROGFontsv1.6-Regular" size="31.0" />
             </font>
         </Label>
-        <Label fx:id="loadingLabel" layoutX="193.0" layoutY="517.0" prefHeight="50.0" prefWidth="114.0" text="Loading" textAlignment="CENTER">
+        <Label fx:id="loadingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="513.0" prefHeight="52.0" prefWidth="200.0" text="Loading">
             <font>
                 <Font name="ROGFontsv1.6-Regular" size="28.0" />
             </font>
