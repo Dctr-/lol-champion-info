@@ -70,3 +70,11 @@
     -fx-border-color: #DAA520;
     -fx-effect: dropshadow(three-pass-box, rgba(218,165, 32, 0.6), 8, 0.0, 0, 0);
 }
+
+.abilitiesTitle {
+    -fx-font-weight: bold;
+}
+
+.champName {
+    -fx-font-weight: bold;
+}

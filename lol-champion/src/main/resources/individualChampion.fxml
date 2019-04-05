@@ -11,38 +11,14 @@
         <AnchorPane fx:id="mainWindow" prefHeight="700.0" prefWidth="500.0">
             <children>
                 <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt;-- Back" />
-            <Label fx:id="championName" layoutX="35.0" layoutY="46.0" prefHeight="30.0" prefWidth="447.0" text="Champion Name + Blurb">
+            <Label fx:id="championName" layoutX="35.0" layoutY="46.0" prefHeight="30.0" prefWidth="447.0" styleClass="champName" text="Champion Name + Blurb">
                <font>
                   <Font size="20.0" />
                </font></Label>
             <ImageView fx:id="championSplash" fitHeight="280.0" fitWidth="154.0" layoutX="35.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="lblAbilities" layoutX="323.0" layoutY="82.0" text="Abilities" underline="true">
+            <Label fx:id="lblAbilities" layoutX="220.0" layoutY="82.0" styleClass="abilitiesTitle" text="Abilities" underline="true">
                <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="qImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="wImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="eImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="rImg" fitHeight="30.0" fitWidth="30.0" layoutX="198.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="qAbilityLabel" layoutX="250.0" layoutY="121.0" prefHeight="20.0" prefWidth="241.0" text="qLabel">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="wAbilityLabel" layoutX="250.0" layoutY="151.0" prefHeight="20.0" prefWidth="241.0" text="wLabel">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="eAbilityLabel" layoutX="250.0" layoutY="181.0" prefHeight="20.0" prefWidth="241.0" text="eLabel">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="rAbilityLabel" layoutX="250.0" layoutY="211.0" prefHeight="20.0" prefWidth="241.0" text="rLabel">
-               <font>
-                  <Font size="14.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
             <ImageView fx:id="attackDamageIcon" fitHeight="50.0" fitWidth="50.0" layoutX="213.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
@@ -63,12 +39,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblSkins" layoutX="232.0" layoutY="370.0" text="Skins">
+            <Label fx:id="lblSkins" layoutX="213.0" layoutY="370.0" styleClass="abilitiesTitle" text="Skins">
                <font>
-                  <Font size="16.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="skinsScrollPane" hbarPolicy="ALWAYS" layoutX="21.0" layoutY="395.0" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="262.0" prefWidth="459.0" vbarPolicy="NEVER">
+            <ScrollPane fx:id="skinsScrollPane" hbarPolicy="ALWAYS" layoutX="21.0" layoutY="413.0" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="262.0" prefWidth="459.0" vbarPolicy="NEVER">
                 <content>
                     <TilePane fx:id="skinsTilePane" alignment="CENTER" prefHeight="114.0" prefWidth="457.0" />
                 </content>
@@ -78,6 +54,46 @@
                     <Font size="15.0" />
                 </font>
             </RadioButton>
+            <Pane layoutX="189.0" layoutY="124.0" prefHeight="31.0" prefWidth="304.0">
+               <children>
+                  <ImageView fx:id="qImg" fitHeight="30.0" fitWidth="30.0" layoutX="30.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="qAbilityLabel" layoutX="75.0" layoutY="4.0" prefHeight="20.0" prefWidth="241.0" text="qLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="189.0" layoutY="150.0" prefHeight="31.0" prefWidth="304.0">
+               <children>
+                   <ImageView fx:id="wImg" fitHeight="30.0" fitWidth="30.0" layoutX="30.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wAbilityLabel" layoutX="75.0" layoutY="6.0" prefHeight="20.0" prefWidth="241.0" text="wLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="201.0" layoutY="181.0" prefHeight="31.0" prefWidth="304.0">
+               <children>
+                  <ImageView fx:id="eImg" fitHeight="30.0" fitWidth="30.0" layoutX="18.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="eAbilityLabel" layoutX="65.0" layoutY="4.0" prefHeight="20.0" prefWidth="241.0" text="eLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="189.0" layoutY="212.0" prefHeight="31.0" prefWidth="304.0">
+               <children>
+                  <ImageView fx:id="rImg" fitHeight="30.0" fitWidth="30.0" layoutX="30.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="rAbilityLabel" layoutX="75.0" layoutY="4.0" prefHeight="20.0" prefWidth="241.0" text="rLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             </children>
         </AnchorPane>
     </children>
