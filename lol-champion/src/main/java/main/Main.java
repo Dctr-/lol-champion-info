@@ -28,6 +28,9 @@ public class Main extends Application {
         LauncherImpl.launchApplication(Main.class, SplashPreloader.class, args);
     }
 
+    /**
+     * Finds the path of wherever the program is being run from (in production this will be the path to the jar file)
+     */
     private static void findApplicationPath() {
         String findPath = "";
         try {

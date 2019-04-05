@@ -8,6 +8,10 @@ import java.util.List;
 
 public class DBManager {
 
+    /**
+     * Initializes the DB Manager, should only be done once. Establishes the initial connection and creates the
+     * necessary tables if they don't exist
+     */
     public DBManager() {
         Connection conn = null;
         try {
@@ -43,6 +47,12 @@ public class DBManager {
         }
     }
 
+    /**
+     * Inserts a champion object into the database by serializing the object into a byte array and
+     * storing it along with the champion name
+     *
+     * @param champion the champion object to be stored
+     */
     public void insertChampion(Champion champion) {
         String sql = "INSERT INTO champions(name,data) VALUES(?,?)";
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -54,6 +64,14 @@ public class DBManager {
         }
     }
 
+    /**
+     * Queries the database to find a specific champion. The byte array found in the database in then deserialized into
+     * a champion object and returned.
+     *
+     * @param championName the name of the champion to be queried'
+     *
+     * @return the found champion or null if not found
+     */
     public Champion queryChampion(String championName) {
         Champion champion = null;
         String sql = "SELECT id, name, data "
@@ -71,6 +89,11 @@ public class DBManager {
         return champion;
     }
 
+    /**
+     * Establishes a connection to the SQLite database
+     *
+     * @return Connection object representing the new connection
+     */
     public Connection getConnection() {
         Connection conn = null;
         try {

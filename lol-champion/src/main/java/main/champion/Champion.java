@@ -69,6 +69,12 @@ public class Champion implements Serializable {
         return spells;
     }
 
+    /**
+     * Serializes the object into a byte array for storage in the DB
+     *
+     * @return byte array representing all the data associated with the object
+     * @throws IOException if an I/O error occurs while writing stream header
+     */
     public byte[] serialize() throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -77,6 +83,14 @@ public class Champion implements Serializable {
         return bos.toByteArray();
     }
 
+    /**
+     * Deserializes a byte array into a champion object
+     *
+     * @param data a byte stream which was previously serialized using {@link main.champion.Champion#serialize()}
+     * @return a champion object if found
+     * @throws IOException if an I/O error occurs while reading stream header
+     * @throws ClassNotFoundException if the byte array doesn't match a champion object
+     */
     public static Champion deserialize(byte[] data) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bis = new ByteArrayInputStream(data);
         ObjectInputStream in = new ObjectInputStream(bis);

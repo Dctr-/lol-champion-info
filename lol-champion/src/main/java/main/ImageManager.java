@@ -48,7 +48,7 @@ public class ImageManager {
             File icon = new File(path + fileName + "." + fileExtension);
             if (!icon.exists()) {
                 Image newImage = new Image(url, width, height, true, false);
-                imageView = new ImageView(newImage); //Creates the image of main.champion, pulled from riot website
+                imageView = new ImageView(newImage);
                 File imageFile = new File(path + fileName + "." + fileExtension);
                 if (!imageFile.getParentFile().exists()) {
                     imageFile.getParentFile().mkdirs();
@@ -63,7 +63,7 @@ public class ImageManager {
 
 
     /**
-     * Starts downloading all the images. Images can be later accessed
+     * Starts downloading all the images in parallel using 20 threads. Images can be later accessed
      * using {@link ImageManager#getImage(java.lang.String)}
      */
     public static void startImageDownload() {
