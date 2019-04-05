@@ -35,22 +35,14 @@ public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
     List<Champion> allChampions = new ArrayList<>(); //Creates an array of main.champion objects, alphabetical order
     //Initializers
-    @FXML
-    private ComboBox<String> sortComboBox;
-    @FXML
-    private TextField championSearchBar;
-    @FXML
-    private TilePane championTilePane;
-    @FXML
-    private ScrollPane championScrollPane;
-    @FXML
-    private AnchorPane mainWindow;
-    @FXML
-    private GridPane mainGridPane;
-    @FXML
-    private Label titleLabel;
-    @FXML
-    private Label sortByLabel;
+    @FXML private ComboBox<String> sortComboBox;
+    @FXML private TextField championSearchBar;
+    @FXML private TilePane championTilePane;
+    @FXML private ScrollPane championScrollPane;
+    @FXML private AnchorPane mainWindow;
+    @FXML private GridPane mainGridPane;
+    @FXML private Label titleLabel;
+    @FXML private Label sortByLabel;
 
     private FXMLLoader individualChampionLoader;
     private Scene individualChampionScene;
@@ -105,6 +97,11 @@ public class Controller {
         });
     }
 
+    /**
+     * Gets the champion data by parsing RIOTGames static JSON data
+     *
+     * @return List of Champion objects containing unique information about each champion
+     */
     private List<Champion> getChampionData() {
         Gson gson = new Gson(); //Parsing object
         List<Champion> champions = new ArrayList<>();
@@ -172,6 +169,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Loads all the images by adding them to a queue in ImageManager, utilizing multiple threads for improved speeds.
+     * Images are stored locally once downloaded for fast lookup and load times.
+     */
     private void loadImages() {
         for (Champion champion : allChampions) {
             ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getName() + ".png", champion.getName() + "_icon", 75, 75);
@@ -192,12 +193,17 @@ public class Controller {
         ImageManager.startImageDownload();
     }
 
-    private void searchTilePanes(String keyword) {
-        championTilePane.getChildren().clear();
-        if (sorted) {
-            for (Champion champion : curSorted) {
+    /**
+     * When the textfield championSearchBar listener registers a change, the list of champions are parsed.
+     * Champions that fit the criteria are displayed.
+     * Criteria includes the champion name containing the text entered, and the current status of the comboBox
+     */
+    private void searchTilePanes (String keyword) {
+        championTilePane.getChildren().clear(); //Clears all the current panes on the tilePane.
+        if (sorted){
+            for (Champion champion : curSorted) { //Checks if the characters in the textfield are contained in the character name
                 if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                    iconDisplay(champion);
+                    iconDisplay(champion); //If they are, the champion's icon is displayed.
                 }
             }
         } else {
@@ -209,12 +215,6 @@ public class Controller {
         }
     }
 
-     /**
-     * Sorts through all champions and applies filter based on sort chosen in combobox.
-     * Favourite filter gets stored in db and is unique to the program, saves after close.
-     *
-     * @param filterSelected  filter that chosen in the combobox.
-     */
     public void sortTilePanes(String filterSelected) {
         sorted = true;
         championTilePane.getChildren().clear();
@@ -245,25 +245,37 @@ public class Controller {
         }
     }
 
+    /**
+     * Adds a Pane to championTilePane for a given Champion object.  Contains: name, icon
+     *
+     * @param champion Champion object
+     */
     private void iconDisplay(Champion champion) {
-        Label newLabel = new Label(champion.getName());
-        newLabel.setGraphic(championIcons.get(champion.getName()));
-        newLabel.setContentDisplay(ContentDisplay.TOP);
+        Label newLabel = new Label(champion.getName()); //Creates a label with the champions name
+        newLabel.setGraphic(championIcons.get(champion.getName())); //Sets the image to the icon gathered by ImageManager
+        newLabel.setContentDisplay(ContentDisplay.TOP); //Sets the image to the top of the label, text below
 
-        Pane newPane = new Pane();
+        Pane newPane = new Pane(); //Add the label to a pane
         newPane.getChildren().add(newLabel);
 
         // onclick action to every icon
-        newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+        newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> { //Gives the pane an event handler for if the champion is clicked
             try {
-                changeScreen(event, champion);
+                changeScreen(event, champion); //When the champion is clicked, changeScreen is called, the champions data is passed as well for more detailed information
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }));
-        championTilePane.getChildren().add(newPane);
+        championTilePane.getChildren().add(newPane); //Adds the champion to the tilePane
     }
 
+    /**
+     * Creates a hashmap of champion icons, their name as key, the Imageview as data.  Fast lookup for champion images
+     */
+    /**
+     * Creates a HashMap of champion ImageView icons
+     * @return HashMap with champion name as key, ImageView as content
+     */
     private HashMap<String, ImageView> getChampionIcons() {
         HashMap<String, ImageView> imageViewHashMap = new HashMap<>();
         for (Champion champion : allChampions) {
@@ -272,21 +284,27 @@ public class Controller {
         return imageViewHashMap;
     }
 
-    //When method is called, scene will change to individualChampion
+    /**
+     * Changes the scene from sample.fxml to individualChampion.fxml
+     *
+     * @param event MouseEvent whereby the user clicked on a champions pane in the championTilePane
+     * @param champion Champion object that corresponds to the champion pane clicked
+     * @throws IOException
+     */
     public void changeScreen(MouseEvent event, Champion champion) throws IOException {
         if (individualChampionLoader == null) {
             individualChampionLoader = new FXMLLoader(getClass().getClassLoader().getResource("individualChampion.fxml"));
             individualChampionScene = new Scene(individualChampionLoader.load());
         }
 
-        Main.getPrimaryStage().setScene(individualChampionScene);
+        Main.getPrimaryStage().setScene(individualChampionScene); //Changes scenes to the IndividualChampion layout
         Main.getPrimaryStage().getScene().getStylesheets().removeAll();
         Main.getPrimaryStage().getScene().getStylesheets().add("champStyle.css");
 
-        IndividualChampionController controller = individualChampionLoader.getController();
-        controller.setParent(((Node) event.getSource()).getScene());
+        IndividualChampionController controller = individualChampionLoader.getController(); //Changes the controller to the IndividualChampionController
+        controller.setParent(((Node) event.getSource()).getScene()); //Gets the existing scene from the mouse event
         controller.setParentController(this);
-        controller.setChampion(champion);
+        controller.setChampion(champion); //Passes the champion information to the new scene
     }
 
     //From http://www.java2s.com/Tutorials/Java/Network_How_to/URL/Get_JSON_from_URL.htm

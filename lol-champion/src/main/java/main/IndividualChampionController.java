@@ -20,63 +20,42 @@ public class IndividualChampionController {
     private Controller parentController;
 
     //Initializers
-    @FXML
-    private Button backButton;
-    @FXML
-    private Label championName;
-    @FXML
-    private ImageView championSplash;
-    @FXML
-    private Label lblAbilities;
-    @FXML
-    private ImageView qImg;
-    @FXML
-    private ImageView wImg;
-    @FXML
-    private ImageView eImg;
-    @FXML
-    private ImageView rImg;
-    @FXML
-    private Label qAbilityLabel;
-    @FXML
-    private Label wAbilityLabel;
-    @FXML
-    private Label eAbilityLabel;
-    @FXML
-    private Label rAbilityLabel;
-    @FXML
-    private ImageView attackDamageIcon;
-    @FXML
-    private ImageView abilityPowerIcon;
-    @FXML
-    private ImageView defenseIcon;
-    @FXML
-    private Label attackDamageValue;
-    @FXML
-    private Label abilityPowerValue;
-    @FXML
-    private Label defenseValue;
-    @FXML
-    private TilePane skinsTilePane;
-    @FXML
-    private RadioButton favouriteButton;
-    @FXML
-    private ScrollPane skinsScrollPane;
+    @FXML private Button backButton;
+    @FXML private Label championName;
+    @FXML private ImageView championSplash;
+    @FXML private Label lblAbilities;
+    @FXML private ImageView qImg;
+    @FXML private ImageView wImg;
+    @FXML private ImageView eImg;
+    @FXML private ImageView rImg;
+    @FXML private Label qAbilityLabel;
+    @FXML private Label wAbilityLabel;
+    @FXML private Label eAbilityLabel;
+    @FXML private Label rAbilityLabel;
+    @FXML private ImageView attackDamageIcon;
+    @FXML private ImageView abilityPowerIcon;
+    @FXML private ImageView defenseIcon;
+    @FXML private Label attackDamageValue;
+    @FXML private Label abilityPowerValue;
+    @FXML private Label defenseValue;
+    @FXML private TilePane skinsTilePane;
+    @FXML private RadioButton favouriteButton;
+    @FXML private ScrollPane skinsScrollPane;
 
     @FXML
     private void initialize() {
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton.setOnAction(new EventHandler<ActionEvent>() { //Sets the action for when the back button is pressed
             @Override
             public void handle(ActionEvent event) {
                 try {
                     // update favourite list
-                    changeScreen(event);
+                    changeScreen(event); //Changes screen back to the main champion display
                 } catch (IOException ie) {
                     ie.printStackTrace();
                 }
             }
         });
-        skinsTilePane.setHgap(6);
+        skinsTilePane.setHgap(6); //Sets a gap between the skin images
     }
 
     /**
@@ -107,6 +86,13 @@ public class IndividualChampionController {
     }
 
     // Change screen back to main menu and update the list of champs
+
+    /**
+     * Switches from individual champion display to screen displaying all champions
+     *
+     * @param event ActionEvent for the back button press
+     * @throws IOException
+     */
     public void changeScreen(ActionEvent event) throws IOException {
         Main.getPrimaryStage().setScene(parent);
         // swap stylesheets back to main css
@@ -120,9 +106,14 @@ public class IndividualChampionController {
         this.parent = parent;
     }
 
+    /**
+     * Sets the champion in IndividualChampionController
+     *
+     * @param champion Champion object from a pane clicked in the main window
+     */
     public void setChampion(Champion champion) {
         this.champion = champion;
-        setData();
+        setData(); //Displays all the data regarding the clicked champion on the screen
         favouriteButton();
     }
 
@@ -130,9 +121,12 @@ public class IndividualChampionController {
         this.parentController = parentController;
     }
 
-    private void setData() { //Sets all the graphics on the javaFX scene
-        championName.setText(champion.getName() + " " + champion.getTitle());
-        championSplash.setImage(ImageManager.getImage(champion.getName() + "_splash").getImage());
+    /**
+     * Sets all data on individualChampion.fxml scene to data from the current Champion object
+     */
+    private void setData() {
+        championName.setText(champion.getName() + " " + champion.getTitle()); //Concatenates the champion name with their small blurb
+        championSplash.setImage(ImageManager.getImage(champion.getName() + "_splash").getImage()); //Sets the Splash Art in the top left, showing default champion image
         qAbilityLabel.setText(champion.getSpells().get(0).getName());
         wAbilityLabel.setText(champion.getSpells().get(1).getName());
         eAbilityLabel.setText(champion.getSpells().get(2).getName());
@@ -151,8 +145,7 @@ public class IndividualChampionController {
         setSkins();
     }
 
-    private void setSkins() {
-        double totalWidth = 0;
+    private void setSkins () {
         skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6) + 40);
         skinsTilePane.getChildren().clear();
 
@@ -189,8 +182,6 @@ public class IndividualChampionController {
 
             Pane newPane = new Pane();
             newPane.getChildren().add(newLabel);
-            totalWidth += newPane.getWidth();
-            //skinsTilePane.setPrefWidth(totalWidth);
             skinsTilePane.getChildren().add(newPane);
         }
     }
