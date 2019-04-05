@@ -215,6 +215,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Method to sort the currently displayed champions by either given tags or user selected favourites.
+     * Will overlay with search method if need be, and favourites are updated on return to main screen
+     */
     public void sortTilePanes(String filterSelected) {
         sorted = true;
         championTilePane.getChildren().clear();

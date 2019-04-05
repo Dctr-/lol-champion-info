@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
 
 import java.io.File;
 
-// this isnt linked
 public class SplashController {
     @FXML
     private Label loadingLabel;
@@ -25,9 +25,10 @@ public class SplashController {
             loadingLabel.setText("Installing...");
         }
 
-        // trying to download gif and play on center, but gif doesnt animate
+        // trying to download gif and play on center, but gif doesnt animate. Might be a specific preloader thing
         // TODO: 2019-04-05 animate gif rather than having it still
         String loadingPath = "https://i.imgur.com/x9IAP39.gif";
+
         Image load = new Image(loadingPath);
         loadingGif.setImage(load);
     }
