@@ -157,6 +157,11 @@ public class Controller {
         return champions;
     }
 
+    /**
+     * Load and return list of all current favourited champions from database
+     *
+     * @param champions the champion object to be stored
+     */
     private void loadFavourites(List<Champion> champions) {
         DBManager db = Main.getDbManager();
         List<String> favourites = db.queryFavourites();
@@ -175,6 +180,7 @@ public class Controller {
      * Images are stored locally once downloaded for fast lookup and load times.
      */
     private void loadImages() {
+        // parses to get all champion icons, splashs, & skins
         for (Champion champion : allChampions) {
             ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getName() + ".png", champion.getName() + "_icon", 75, 75);
             ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getName() + "_0.jpg", champion.getName() + "_splash", 154, 280);
@@ -183,6 +189,7 @@ public class Controller {
             }
         }
 
+        // downloads our default icons for champion page
         ImageManager.queueImageDownload("https://i.imgur.com/V0qG0YN.png", "Champion_Q", 30, 30);
         ImageManager.queueImageDownload("https://i.imgur.com/D4F7lXv.png", "Champion_W", 30, 30);
         ImageManager.queueImageDownload("https://i.imgur.com/8e5wNZF.png", "Champion_E", 30, 30);
@@ -275,10 +282,7 @@ public class Controller {
     }
 
     /**
-     * Creates a hashmap of champion icons, their name as key, the Imageview as data.  Fast lookup for champion images
-     */
-    /**
-     * Creates a HashMap of champion ImageView icons
+     * Creates a HashMap of champion ImageView icons, fast lookup for champion images
      * @return HashMap with champion name as key, ImageView as content
      */
     private HashMap<String, ImageView> getChampionIcons() {

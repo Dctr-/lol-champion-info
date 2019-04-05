@@ -85,8 +85,6 @@ public class IndividualChampionController {
         });
     }
 
-    // Change screen back to main menu and update the list of champs
-
     /**
      * Switches from individual champion display to screen displaying all champions
      *
