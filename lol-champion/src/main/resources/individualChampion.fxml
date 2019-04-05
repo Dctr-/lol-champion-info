@@ -39,12 +39,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblSkins" layoutX="213.0" layoutY="370.0" styleClass="abilitiesTitle" text="Skins">
+            <Label fx:id="lblSkins" layoutX="213.0" layoutY="362.0" styleClass="abilitiesTitle" text="Skins">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="skinsScrollPane" hbarPolicy="ALWAYS" layoutX="21.0" layoutY="395.0" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="280.0" prefWidth="459.0" vbarPolicy="NEVER">
+            <ScrollPane fx:id="skinsScrollPane" hbarPolicy="ALWAYS" layoutX="21.0" layoutY="403.0" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="272.0" prefWidth="459.0" vbarPolicy="NEVER">
                 <content>
                     <TilePane fx:id="skinsTilePane" alignment="CENTER" prefHeight="114.0" prefWidth="457.0" />
                 </content>
