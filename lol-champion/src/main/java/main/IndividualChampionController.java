@@ -128,6 +128,7 @@ public class IndividualChampionController {
 
     private void setSkins () {
         skinsTilePane.getChildren().clear();
+        skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6));
         skinsTilePane.setPrefRows(1);
         for (Skin skin : champion.getSkins()) {
             String[] skinNameSplit = skin.getName().split(" ");
