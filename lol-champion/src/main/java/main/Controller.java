@@ -55,6 +55,7 @@ public class Controller {
     private FXMLLoader individualChampionLoader;
     private Scene individualChampionScene;
     boolean sorted = false;
+    String currentSort = "All";
     List<Champion> curSorted = new ArrayList<>();
 
     @FXML
@@ -92,14 +93,14 @@ public class Controller {
 
         // combobox sort selection has been made, update champs
         sortComboBox.setOnAction(e -> {
-            String filter = sortComboBox.getValue();
-            if (filter.equals("All")) {
+            currentSort = sortComboBox.getValue();
+            if (currentSort.equals("All")) {
                 // reset filter, need to clear list and clear box
                 sorted = false;
                 curSorted.clear();
                 searchTilePanes("");
             } else {
-                sortTilePanes(filter);
+                sortTilePanes(currentSort);
             }
         });
     }
@@ -208,7 +209,7 @@ public class Controller {
         }
     }
 
-    private void sortTilePanes(String filterSelected) {
+    public void sortTilePanes(String filterSelected) {
         sorted = true;
         championTilePane.getChildren().clear();
 
@@ -225,6 +226,13 @@ public class Controller {
                     curSorted.add(champion);
                 }
             }
+        }
+    }
+
+    // if you have favourites selected and remove it, need to update the tilepane to remove the champ
+    public void backButtonUpdate(){
+        if (currentSort.equals("Favorites")){
+            sortTilePanes(currentSort);
         }
     }
 
@@ -265,6 +273,7 @@ public class Controller {
 
         IndividualChampionController controller = individualChampionLoader.getController();
         controller.setParent(((Node) event.getSource()).getScene());
+        controller.setParentController(this);
         controller.setChampion(champion);
     }
 

@@ -22,7 +22,7 @@ public class SplashController {
         System.out.println("Here");
         String path = Main.getApplicationPath()+"images/";
         File imagesFolder = new File(path);
-.
+
         if (!imagesFolder.exists()){
             loadingLabel.setText("Installing...");
         }

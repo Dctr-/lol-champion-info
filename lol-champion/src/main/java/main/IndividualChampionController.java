@@ -25,6 +25,7 @@ import java.util.List;
 public class IndividualChampionController {
     private Champion champion;
     private Scene parent;
+    private Controller parentController;
 
     //Initializers
     @FXML private Button backButton;
@@ -55,6 +56,7 @@ public class IndividualChampionController {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    // update favourite list
                     changeScreen(event);
                 } catch (IOException ie) {
                     ie.printStackTrace();
@@ -64,7 +66,7 @@ public class IndividualChampionController {
         skinsTilePane.setHgap(6);
     }
 
-    public void favouriteButton() {
+    private void favouriteButton() {
         // connect to db
         DBManager db = Main.getDbManager();
 
@@ -88,7 +90,7 @@ public class IndividualChampionController {
 
     public void changeScreen(ActionEvent event) throws IOException {
         Main.getPrimaryStage().setScene(parent);
-
+        parentController.backButtonUpdate();
     }
 
     // Accessors
@@ -100,6 +102,10 @@ public class IndividualChampionController {
         this.champion = champion;
         setData();
         favouriteButton();
+    }
+
+    public void setParentController(Controller parentController) {
+        this.parentController = parentController;
     }
 
     private void setData() { //Sets all the graphics on the javaFX scene
