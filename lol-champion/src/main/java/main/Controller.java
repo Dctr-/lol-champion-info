@@ -269,7 +269,10 @@ public class Controller {
             individualChampionLoader = new FXMLLoader(getClass().getClassLoader().getResource("individualChampion.fxml"));
             individualChampionScene = new Scene(individualChampionLoader.load());
         }
+
         Main.getPrimaryStage().setScene(individualChampionScene);
+        Main.getPrimaryStage().getScene().getStylesheets().removeAll();
+        Main.getPrimaryStage().getScene().getStylesheets().add("champStyle.css");
 
         IndividualChampionController controller = individualChampionLoader.getController();
         controller.setParent(((Node) event.getSource()).getScene());
