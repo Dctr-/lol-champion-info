@@ -14,10 +14,6 @@ import javafx.stage.WindowEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Main extends Application {
 
@@ -36,12 +32,12 @@ public class Main extends Application {
         String findPath = "";
         try {
             findPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParentFile().getPath();
-            if(!findPath.endsWith("/")) {
+            if (!findPath.endsWith("/")) {
                 findPath += "/";
             }
             findPath += "lol-champion/";
             File pathDir = new File(findPath);
-            if(!pathDir.exists()) {
+            if (!pathDir.exists()) {
                 Files.createDirectories(Paths.get(pathDir.toURI()));
             }
             applicationPath = findPath;
@@ -51,6 +47,7 @@ public class Main extends Application {
     }
 
     private static Stage primaryStage;
+
     private void setPrimaryStage(Stage stage) {
         Main.primaryStage = stage;
     }

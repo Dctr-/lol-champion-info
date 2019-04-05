@@ -61,7 +61,7 @@ public class DBManager {
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, championName);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 champion = Champion.deserialize(rs.getBytes("data"));
             }
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class DBManager {
         return conn;
     }
 
-    public void insertFavourite(Champion champion){
+    public void insertFavourite(Champion champion) {
         String sql = "INSERT INTO favourites(name) VALUES(?)";
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, champion.getName());
@@ -94,14 +94,24 @@ public class DBManager {
         }
     }
 
+    public void removeFavourite(Champion champion) {
+        String sql = "DELETE FROM favourites WHERE name = ?";
+        try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, champion.getName());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // method to return list of current favourites in db
-    public List<String> queryFavourites(){
+    public List<String> queryFavourites() {
         List<String> favourites = new ArrayList<>();
         String sql = "SELECT name FROM favourites";
 
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 favourites.add(rs.getString("name"));
             }
         } catch (Exception e) {

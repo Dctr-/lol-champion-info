@@ -8,7 +8,7 @@
     -fx-border-radius: 1px;
     -fx-border-color: grey;
     -fx-padding: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 3, 0, 0, 0);
 }
 
 .scroll-pane .scroll-bar:vertical {
@@ -41,6 +41,7 @@
     -fx-text-fill: black;
     -fx-opacity: 0.5;
 }
+
 .text-field:focused {
     -fx-background-color: -fx-focus-color, -fx-background;
 }
@@ -50,19 +51,23 @@
     -fx-background-color: linear-gradient(#f5f7fa, #c3cfe2);
     -fx-opacity: 0.7;
 }
+
 .combo-box-popup .list-view {
     -fx-background-color: -fx-box-border, -fx-control-inner-background;
     -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 8, 0.0, 0, 0);
 }
+
 .combo-box-popup .list-view .list-cell {
     -fx-background-color: #ececec;
     -fx-text-fill: #9a9a9a;
 }
+
 .combo-box-popup .list-view .list-cell:hover {
     -fx-text-fill: black;
     -fx-cursor: hand;
 }
+
 .combo-box .cell:selected {
     -fx-text-fill: black;
 }

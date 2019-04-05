@@ -1,7 +1,5 @@
 package main;
 
-import main.champion.Champion;
-import main.champion.Skin;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -20,10 +18,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import main.champion.Champion;
+import main.champion.Skin;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
@@ -36,14 +35,22 @@ public class Controller {
     HashMap<String, ImageView> championIcons = new HashMap<>();
     List<Champion> allChampions = new ArrayList<>(); //Creates an array of main.champion objects, alphabetical order
     //Initializers
-    @FXML private ComboBox<String> sortComboBox;
-    @FXML private TextField championSearchBar;
-    @FXML private TilePane championTilePane;
-    @FXML private ScrollPane championScrollPane;
-    @FXML private AnchorPane mainWindow;
-    @FXML private GridPane mainGridPane;
-    @FXML private Label titleLabel;
-    @FXML private Label sortByLabel;
+    @FXML
+    private ComboBox<String> sortComboBox;
+    @FXML
+    private TextField championSearchBar;
+    @FXML
+    private TilePane championTilePane;
+    @FXML
+    private ScrollPane championScrollPane;
+    @FXML
+    private AnchorPane mainWindow;
+    @FXML
+    private GridPane mainGridPane;
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private Label sortByLabel;
 
     private FXMLLoader individualChampionLoader;
     private Scene individualChampionScene;
@@ -53,6 +60,8 @@ public class Controller {
         allChampions = getChampionData();
 
         loadImages();
+
+        loadFavourites(allChampions);
 
         //Load all images into hashmap
         championIcons = getChampionIcons();
@@ -82,9 +91,11 @@ public class Controller {
         // combobox sort selection has been made, update champs
         sortComboBox.setOnAction(e -> {
             String filter = sortComboBox.getValue();
-            if (filter.equals("All")){
+            if (filter.equals("All")) {
                 searchTilePanes("");
-            } else { sortTilePanes(filter); }
+            } else {
+                sortTilePanes(filter);
+            }
         });
     }
 
@@ -105,7 +116,9 @@ public class Controller {
 
         // only parse data if it doesn't exists in the db
         DBManager db = Main.getDbManager();
-        if(db.queryChampion(championNames.get(0)) == null) {
+
+
+        if (db.queryChampion(championNames.get(0)) == null) {
             ExecutorService pool = Executors.newFixedThreadPool(20);
             java.util.List<Callable<Champion>> tasks = new ArrayList<>();
 
@@ -138,8 +151,21 @@ public class Controller {
                 champions.add(db.queryChampion(championName));
             }
         }
-
         return champions;
+    }
+
+    private void loadFavourites(List<Champion> champions) {
+        DBManager db = Main.getDbManager();
+        List<String> favourites = db.queryFavourites();
+
+        for (Champion champion: champions){
+            for (String favourite : favourites) {
+                if (favourite.equals(champion.getName())) {
+                    champion.setFavourited(true);
+                }
+            }
+        }
+
     }
 
     private void loadImages() {
@@ -162,7 +188,7 @@ public class Controller {
         ImageManager.startImageDownload();
     }
 
-    private void searchTilePanes (String newValue) {
+    private void searchTilePanes(String newValue) {
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
             if (champion.getName().toLowerCase().contains(newValue.toLowerCase())) {
@@ -171,16 +197,24 @@ public class Controller {
         }
     }
 
-    private void sortTilePanes(String filterSelected){
+    private void sortTilePanes(String filterSelected) {
         championTilePane.getChildren().clear();
+
         for (Champion champion : allChampions) {
-            if (champion.getTags().contains(filterSelected)){
-                iconDisplay(champion);
+            // deal with favourite or normal tag
+            if (filterSelected.equals("Favorites")){
+                if (champion.isFavourited()){
+                    iconDisplay(champion);
+                }
+            } else {
+                if (champion.getTags().contains(filterSelected)) {
+                    iconDisplay(champion);
+                }
             }
         }
     }
 
-    private void iconDisplay(Champion champion){
+    private void iconDisplay(Champion champion) {
         Label newLabel = new Label(champion.getName());
         newLabel.setGraphic(championIcons.get(champion.getName()));
         newLabel.setContentDisplay(ContentDisplay.TOP);
@@ -209,7 +243,7 @@ public class Controller {
 
     //When method is called, scene will change to individualChampion
     public void changeScreen(MouseEvent event, Champion champion) throws IOException {
-        if(individualChampionLoader == null) {
+        if (individualChampionLoader == null) {
             individualChampionLoader = new FXMLLoader(getClass().getClassLoader().getResource("individualChampion.fxml"));
             individualChampionScene = new Scene(individualChampionLoader.load());
         }

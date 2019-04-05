@@ -11,6 +11,7 @@ public class Champion implements Serializable {
     private Info info;
     private List<Skin> skins;
     private List<Spell> spells;
+    private boolean favourited;
 
     public Champion(String id, String title, String blurb, int key, ArrayList<String> tags, int difficulty) {
         this.id = id;
@@ -18,6 +19,14 @@ public class Champion implements Serializable {
         this.blurb = blurb;
         this.key = key;
         this.tags = tags;
+    }
+
+    public boolean isFavourited() {
+        return favourited;
+    }
+
+    public void setFavourited(boolean favourited) {
+        this.favourited = favourited;
     }
 
     public String getName() {
@@ -71,6 +80,6 @@ public class Champion implements Serializable {
     public static Champion deserialize(byte[] data) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bis = new ByteArrayInputStream(data);
         ObjectInputStream in = new ObjectInputStream(bis);
-        return (Champion)in.readObject();
+        return (Champion) in.readObject();
     }
 }

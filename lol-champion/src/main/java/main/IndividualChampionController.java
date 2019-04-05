@@ -1,9 +1,5 @@
 package main;
 
-import javafx.scene.control.RadioButton;
-import javafx.scene.text.TextAlignment;
-import main.champion.Champion;
-import main.champion.Skin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,9 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.TextAlignment;
+import main.champion.Champion;
+import main.champion.Skin;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,7 +45,7 @@ public class IndividualChampionController {
     @FXML private RadioButton favouriteButton;
 
     @FXML
-    private void initialize () {
+    private void initialize() {
         backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -57,24 +57,26 @@ public class IndividualChampionController {
             }
         });
         skinsTilePane.setHgap(6);
+    }
 
-        // check to see if button should be filled for champ
-        favouriteButton.setSelected(true);
+    public void favouriteButton() {
+        // connect to db
+        DBManager db = Main.getDbManager();
 
-        // add champ to favourites
+        // deal shading or not shading button
+        if (champion.isFavourited()){
+            System.out.println("Favourited");
+            favouriteButton.setSelected(true);
+        } else { favouriteButton.setSelected(false); }
+
+        // add / remove champ to favourites
         favouriteButton.setOnAction(e -> {
-            DBManager db = Main.getDbManager();
-
-            // ensure no duplicates by getting all current favourites
-            List<String> favourites = db.queryFavourites();
-            // comparing clicked fav to values
-            Boolean inList = false;
-            for (String favourite : favourites){
-                if (champion.getName().equals(favourite)){inList = true;}
-            }
-            // if it's not currently in the db then favourite it
-            if (!inList){
+            if (!champion.isFavourited()) {
                 db.insertFavourite(champion);
+                champion.setFavourited(true);
+            } else {
+                db.removeFavourite(champion);
+                champion.setFavourited(false);
             }
         });
     }
@@ -83,16 +85,18 @@ public class IndividualChampionController {
         Main.getPrimaryStage().setScene(parent);
     }
 
-    //Accessers
+    // Accessors
     public void setParent(Scene parent) {
         this.parent = parent;
     }
+
     public void setChampion(Champion champion) {
         this.champion = champion;
         setData();
+        favouriteButton();
     }
 
-    private void setData () { //Sets all the graphics on the javaFX scene
+    private void setData() { //Sets all the graphics on the javaFX scene
         championName.setText(champion.getName() + " " + champion.getTitle());
         championSplash.setImage(ImageManager.getImage(champion.getName() + "_splash").getImage());
         qAbilityLabel.setText(champion.getSpells().get(0).getName());
@@ -128,7 +132,7 @@ public class IndividualChampionController {
                     newLabel.setText(skinNameSplit[0] + "\n" + skinNameSplit[1]);
                     break;
                 case 3:
-                    newLabel.setText(skinNameSplit[0] +" " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
+                    newLabel.setText(skinNameSplit[0] + " " + skinNameSplit[1] + "\n" + skinNameSplit[2]);
                     break;
                 default:
                     newLabel.setText(skin.getName());
