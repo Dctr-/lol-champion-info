@@ -45,13 +45,13 @@
     -fx-border-radius: 4;
 }
 
-.button:hover{
+.button:hover {
     -fx-opacity: 100%;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 8, 0.0, 0, 0);
     -fx-cursor: hand;
 }
 
-.radio-button{
+.radio-button {
     -fx-background-color: transparent;
     -fx-opacity: 75%;
     -fx-border-color: grey;
@@ -68,7 +68,7 @@
 .radio-button:selected {
     -fx-opacity: 100%;
     -fx-border-color: #DAA520;
-    -fx-effect: dropshadow(three-pass-box, rgba(218,165, 32, 0.6), 8, 0.0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(218, 165, 32, 0.6), 8, 0.0, 0, 0);
 }
 
 .abilitiesTitle {

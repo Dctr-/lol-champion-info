@@ -163,7 +163,7 @@ public class Controller {
         DBManager db = Main.getDbManager();
         List<String> favourites = db.queryFavourites();
 
-        for (Champion champion: champions){
+        for (Champion champion : champions) {
             for (String favourite : favourites) {
                 if (favourite.equals(champion.getName())) {
                     champion.setFavourited(true);
@@ -192,9 +192,9 @@ public class Controller {
         ImageManager.startImageDownload();
     }
 
-    private void searchTilePanes (String keyword) {
+    private void searchTilePanes(String keyword) {
         championTilePane.getChildren().clear();
-        if (sorted){
+        if (sorted) {
             for (Champion champion : curSorted) {
                 if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
                     iconDisplay(champion);
@@ -215,8 +215,8 @@ public class Controller {
 
         for (Champion champion : allChampions) {
             // deal with favourite or normal tag
-            if (filterSelected.equals("Favorites")){
-                if (champion.isFavourited()){
+            if (filterSelected.equals("Favorites")) {
+                if (champion.isFavourited()) {
                     iconDisplay(champion);
                     curSorted.add(champion);
                 }
@@ -230,8 +230,8 @@ public class Controller {
     }
 
     // if you have favourites selected and remove it, need to update the tilepane to remove the champ
-    public void backButtonUpdate(){
-        if (currentSort.equals("Favorites")){
+    public void backButtonUpdate() {
+        if (currentSort.equals("Favorites")) {
             sortTilePanes(currentSort);
         }
     }

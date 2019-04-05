@@ -1,24 +1,18 @@
 package main;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.text.TextAlignment;
-import main.champion.Champion;
-import main.champion.Skin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.TextAlignment;
+import main.champion.Champion;
+import main.champion.Skin;
 
 import java.io.IOException;
-import java.util.List;
 
 public class IndividualChampionController {
     private Champion champion;
@@ -26,27 +20,48 @@ public class IndividualChampionController {
     private Controller parentController;
 
     //Initializers
-    @FXML private Button backButton;
-    @FXML private Label championName;
-    @FXML private ImageView championSplash;
-    @FXML private Label lblAbilities;
-    @FXML private ImageView qImg;
-    @FXML private ImageView wImg;
-    @FXML private ImageView eImg;
-    @FXML private ImageView rImg;
-    @FXML private Label qAbilityLabel;
-    @FXML private Label wAbilityLabel;
-    @FXML private Label eAbilityLabel;
-    @FXML private Label rAbilityLabel;
-    @FXML private ImageView attackDamageIcon;
-    @FXML private ImageView abilityPowerIcon;
-    @FXML private ImageView defenseIcon;
-    @FXML private Label attackDamageValue;
-    @FXML private Label abilityPowerValue;
-    @FXML private Label defenseValue;
-    @FXML private TilePane skinsTilePane;
-    @FXML private RadioButton favouriteButton;
-    @FXML private ScrollPane skinsScrollPane;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Label championName;
+    @FXML
+    private ImageView championSplash;
+    @FXML
+    private Label lblAbilities;
+    @FXML
+    private ImageView qImg;
+    @FXML
+    private ImageView wImg;
+    @FXML
+    private ImageView eImg;
+    @FXML
+    private ImageView rImg;
+    @FXML
+    private Label qAbilityLabel;
+    @FXML
+    private Label wAbilityLabel;
+    @FXML
+    private Label eAbilityLabel;
+    @FXML
+    private Label rAbilityLabel;
+    @FXML
+    private ImageView attackDamageIcon;
+    @FXML
+    private ImageView abilityPowerIcon;
+    @FXML
+    private ImageView defenseIcon;
+    @FXML
+    private Label attackDamageValue;
+    @FXML
+    private Label abilityPowerValue;
+    @FXML
+    private Label defenseValue;
+    @FXML
+    private TilePane skinsTilePane;
+    @FXML
+    private RadioButton favouriteButton;
+    @FXML
+    private ScrollPane skinsScrollPane;
 
     @FXML
     private void initialize() {
@@ -69,9 +84,11 @@ public class IndividualChampionController {
         DBManager db = Main.getDbManager();
 
         // deal shading or not shading button
-        if (champion.isFavourited()){
+        if (champion.isFavourited()) {
             favouriteButton.setSelected(true);
-        } else { favouriteButton.setSelected(false); }
+        } else {
+            favouriteButton.setSelected(false);
+        }
 
         // add / remove champ to favourites on click of button
         favouriteButton.setOnAction(e -> {
@@ -129,7 +146,7 @@ public class IndividualChampionController {
         setSkins();
     }
 
-    private void setSkins () {
+    private void setSkins() {
         double totalWidth = 0;
         skinsTilePane.setPrefWidth(champion.getSkins().size() * (102 + 6) + 40);
         skinsTilePane.getChildren().clear();
