@@ -117,7 +117,6 @@ public class Controller {
         // only parse data if it doesn't exists in the db
         DBManager db = Main.getDbManager();
 
-
         if (db.queryChampion(championNames.get(0)) == null) {
             ExecutorService pool = Executors.newFixedThreadPool(20);
             java.util.List<Callable<Champion>> tasks = new ArrayList<>();
@@ -165,7 +164,6 @@ public class Controller {
                 }
             }
         }
-
     }
 
     private void loadImages() {
@@ -188,10 +186,10 @@ public class Controller {
         ImageManager.startImageDownload();
     }
 
-    private void searchTilePanes(String newValue) {
+    private void searchTilePanes (String keyword) {
         championTilePane.getChildren().clear();
         for (Champion champion : allChampions) {
-            if (champion.getName().toLowerCase().contains(newValue.toLowerCase())) {
+            if (champion.getName().toLowerCase().contains(keyword.toLowerCase())) {
                 iconDisplay(champion);
             }
         }

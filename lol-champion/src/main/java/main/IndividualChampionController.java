@@ -1,5 +1,9 @@
 package main;
 
+import javafx.scene.control.*;
+import javafx.scene.text.TextAlignment;
+import main.champion.Champion;
+import main.champion.Skin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,6 +47,7 @@ public class IndividualChampionController {
     @FXML private Label defenseValue;
     @FXML private TilePane skinsTilePane;
     @FXML private RadioButton favouriteButton;
+    @FXML private ScrollPane skinsScrollPane;
 
     @FXML
     private void initialize() {
@@ -114,12 +119,15 @@ public class IndividualChampionController {
         abilityPowerValue.setText(Integer.toString(champion.getInfo().getMagic()));
         defenseValue.setText(Integer.toString(champion.getInfo().getDefense()));
 
-        skinsTilePane.getChildren().clear();
+        setSkins();
+    }
 
+    private void setSkins () {
+        skinsTilePane.getChildren().clear();
+        skinsTilePane.setPrefRows(1);
         for (Skin skin : champion.getSkins()) {
             String[] skinNameSplit = skin.getName().split(" ");
             Label newLabel = new Label();
-
             newLabel.setTextAlignment(TextAlignment.CENTER);
             switch (skinNameSplit.length) {
                 case 0:
@@ -144,7 +152,6 @@ public class IndividualChampionController {
 
             Pane newPane = new Pane();
             newPane.getChildren().add(newLabel);
-
             skinsTilePane.getChildren().add(newPane);
         }
     }
