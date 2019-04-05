@@ -177,7 +177,7 @@ public class Controller {
             ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + champion.getName() + ".png", champion.getName() + "_icon", 75, 75);
             ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getName() + "_0.jpg", champion.getName() + "_splash", 154, 280);
             for (Skin skin : champion.getSkins()) {
-                ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getName() + "_" + skin.getNum() + ".jpg", champion.getName() + "_" + skin.getNum(), 51, 93);
+                ImageManager.queueImageDownload("http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.getName() + "_" + skin.getNum() + ".jpg", champion.getName() + "_" + skin.getNum(), 102, 186);
             }
         }
 
